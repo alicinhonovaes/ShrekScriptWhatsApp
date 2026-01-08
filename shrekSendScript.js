@@ -1,22 +1,26 @@
 async function enviarScript(scriptText){
 	const lines = scriptText.split(/[\n\t]+/).map(line => line.trim()).filter(line => line);
-	main = document.querySelector("#main"),
-	textarea = main.querySelector(`div[contenteditable="true"]`)
 	
-	if(!textarea) throw new Error("Não há uma conversa aberta")
+	// AQUI ESTA A CORREÇÃO: Usando os atributos do HTML que você mandou
+	const textarea = document.querySelector('div[contenteditable="true"][data-tab="10"]');
+	
+	if(!textarea) throw new Error("Não encontrei a caixa de texto. Clique nela antes de rodar.");
 	
 	for(const line of lines){
-		console.log(line)
+		console.log(`Enviando: ${line}`);
 	
 		textarea.focus();
 		document.execCommand('insertText', false, line);
-		textarea.dispatchEvent(new Event('change', {bubbles: true}));
+		textarea.dispatchEvent(new Event('input', {bubbles: true}));
 	
-		setTimeout(() => {
-			(main.querySelector(`[data-testid="send"]`) || main.querySelector(`[data-icon="send"]`)).click();
-		}, 100);
+		await new Promise(resolve => setTimeout(resolve, 100));
+
+		// Tenta clicar no botão de enviar (pode variar, mas geralmente é esse span ou button)
+		const btnEnviar = document.querySelector('span[data-icon="send"]') || document.querySelector('[aria-label="Enviar"]');
+		if(btnEnviar) btnEnviar.click();
 		
-		if(lines.indexOf(line) !== lines.length - 1) await new Promise(resolve => setTimeout(resolve, 250));
+		// Pausa de segurança
+		if(lines.indexOf(line) !== lines.length - 1) await new Promise(resolve => setTimeout(resolve, 500));
 	}
 	
 	return lines.length;
@@ -25,3679 +29,3537 @@ async function enviarScript(scriptText){
 enviarScript(`
 SHREK
 
-Written by
-
+Escrito por
 William Steig & Ted Elliott
 
+SHREK
+Era uma vez uma adorável 
+princesa. Mas ela tinha um encantamento 
+sobre si de um tipo terrível que só poderia 
+ser quebrado pelo primeiro beijo do amor verdadeiro. 
+Ela estava trancada em um castelo guardado 
+por um terrível dragão cuspidor de fogo. 
+Muitos bravos cavaleiros tentaram 
+libertá-la desta prisão medonha, 
+mas nenhum prevaleceu. Ela esperava na 
+torre do dragão, no quarto mais alto da 
+torre mais alta, pelo seu verdadeiro amor 
+e o primeiro beijo do amor verdadeiro. (ri) 
+Como se isso fosse acontecer. Que 
+monte de... (descarga do banheiro)
 
+All Star - de Smashmouth começa a tocar. Shrek segue o seu 
+dia. Enquanto isso, em uma cidade próxima, os aldeões se reúnem para ir 
+atrás do ogro.
 
+NOITE - PERTO DA CASA DE SHREK
+
+HOMEM 1
+Acha que ele está aí dentro?
+
+HOMEM 2
+Certo. Vamos pegá-lo!
+
+HOMEM 1
+Opa. Espere. Você sabe o que aquela 
+coisa pode fazer com você?
+
+HOMEM 3
+Sim, ele vai moer seus ossos para fazer o 
+pão dele.
+
+Shrek aparece sorrateiramente atrás deles e ri.
 
 SHREK
-Once upon a time there was a lovely 
-princess. But she had an enchantment 
-upon her of a fearful sort which could 
-only be broken by love's first kiss. 
-She was locked away in a castle guarded 
-by a terrible fire-breathing dragon. 
-Many brave knights had attempted to 
-free her from this dreadful prison, 
-but non prevailed. She waited in the 
-dragon's keep in the highest room of 
-the tallest tower for her true love 
-and true love's first kiss. (laughs) 
-Like that's ever gonna happen. What 
-a load of - (toilet flush)
+Sim, bem, na verdade, isso seria um 
+gigante. Agora, ogros, ah, eles são muito piores. 
+Eles farão um terno da sua pele recém 
+descascada.
 
-Allstar - by Smashmouth begins to play. Shrek goes about his 
-day. While in a nearby town, the villagers get together to go 
-after the ogre.
-
-NIGHT - NEAR SHREK'S HOME
-
-MAN1
-Think it's in there?
-
-MAN2
-All right. Let's get it!
-
-MAN1
-Whoa. Hold on. Do you know what that 
-thing can do to you?
-
-MAN3
-Yeah, it'll grind your bones for it's 
-bread.
-
-Shrek sneaks up behind them and laughs.
+HOMENS
+Não!
 
 SHREK
-Yes, well, actually, that would be a 
-giant. Now, ogres, oh they're much worse. 
-They'll make a suit from your freshly 
-peeled skin.
+Eles vão raspar seu fígado. Espremer a 
+geleia dos seus olhos! Na verdade, fica 
+muito bom na torrada.
 
-MEN
-No!
+HOMEM 1
+Para trás! Para trás, besta! Para trás! Eu te aviso! 
+(balança a tocha para Shrek.)
 
-SHREK
-They'll shave your liver. Squeeze the 
-jelly from your eyes! Actually, it's 
-quite good on toast.
-
-MAN1
-Back! Back, beast! Back! I warn ya! 
-(waves the torch at Shrek.)
-
-Shrek calmly licks his fingers and extinguishes the torch. The 
-men shrink back away from him. Shrek roars very loudly and long 
-and his breath extinguishes all the remaining torches until the 
-men are in the dark.
+Shrek calmamente lambe os dedos e apaga a tocha. Os 
+homens recuam para longe dele. Shrek ruge muito alto e longo 
+e seu hálito apaga todas as tochas restantes até que os 
+homens fiquem no escuro.
 
 SHREK
-This is the part where you run away. 
-(The men scramble to get away. He laughs.) 
-And stay out! (looks down and picks 
-up a piece of paper. Reads.) "Wanted. 
-Fairy tale creatures."(He sighs and 
-throws the paper over his shoulder.)
+Esta é a parte em que vocês fogem. 
+(Os homens correm para escapar. Ele ri.) 
+E fiquem longe! (olha para baixo e pega 
+um pedaço de papel. Lê.) "Procura-se. 
+Criaturas de contos de fadas." (Ele suspira e 
+joga o papel por cima do ombro.)
 
+O DIA SEGUINTE
 
-THE NEXT DAY
+Há uma fila de criaturas de contos de fadas. O chefe da guarda 
+senta-se em uma mesa pagando as pessoas por trazerem as criaturas de contos de fadas 
+para ele. Há gaiolas por toda parte. Algumas das pessoas na fila 
+são Peter Pan, que está carregando Sininho em uma gaiola, Gepeto 
+que está carregando Pinóquio, e um fazendeiro que está carregando os três 
+porquinhos.
 
-There is a line of fairy tale creatures. The head of the guard 
-sits at a table paying people for bringing the fairy tale creatures 
-to him. There are cages all around. Some of the people in line 
-are Peter Pan, who is carrying Tinkerbell in a cage, Gipetto 
-who's carrying Pinocchio, and a farmer who is carrying the three 
-little pigs.
+GUARDA
+Tudo bem. Esta está cheia. Levem 
+embora! Vamos andando. Vamos! Levantem-se!
 
-GUARD
-All right. This one's full. Take it 
-away! Move it along. Come on! Get up!
+CHEFE DA GUARDA
+Próximo!
 
+GUARDA
+(tomando a vassoura da bruxa) Me dê isso! 
+Seus dias de voo acabaram. (quebra a 
+vassoura ao meio)
 
-HEAD GUARD
-Next!
+CHEFE DA GUARDA
+São 20 peças de prata pela bruxa. 
+Próximo!
 
-GUARD
-(taking the witch's broom) Give me that! 
-Your flying days are over. (breaks the 
-broom in half)
+GUARDA
+Levante-se! Vamos!
 
-HEAD GUARD
-That's 20 pieces of silver for the witch. 
-Next!
+CHEFE DA GUARDA
+Vinte peças.
 
-GUARD
-Get up! Come on!
+PEQUENO URSO
+(chorando) Esta gaiola é muito pequena.
 
-HEAD GUARD
-Twenty pieces.
+BURRO
+Por favor, não me entregue. Eu nunca mais 
+serei teimoso. Eu posso mudar. Por favor! 
+Me dê outra chance!
 
-LITTLE BEAR
-(crying) This cage is too small.
+VELHA SENHORA
+Ah, cale a boca. (puxa a corda dele)
 
-DONKEY
-Please, don't turn me in. I'll never 
-be stubborn again. I can change. Please! 
-Give me another chance!
+BURRO
+Ai!
 
-OLD WOMAN
-Oh, shut up. (jerks his rope)
+CHEFE DA GUARDA
+Próximo! O que você tem?
 
-DONKEY
-Oh!
+GEPETO
+Este pequeno boneco de madeira.
 
-HEAD GUARD
-Next! What have you got?
+PINÓQUIO
+Eu não sou um boneco. Eu sou um menino de verdade. (seu 
+nariz cresce)
 
-GIPETTO
-This little wooden puppet.
+CHEFE DA GUARDA
+Cinco xelins pelo brinquedo possuído. 
+Levem embora.
 
-PINOCCHIO
-I'm not a puppet. I'm a real boy. (his 
-nose grows)
+PINÓQUIO
+Pai, por favor! Não deixe eles fazerem isso! 
+Me ajude!
 
-HEAD GUARD
-Five shillings for the possessed toy. 
-Take it away.
+Gepeto pega o dinheiro e vai embora. A velha senhora se aproxima 
+da mesa.
 
-PINOCCHIO
-Father, please! Don't let them do this! 
-Help me!
+CHEFE DA GUARDA
+Próximo! O que você tem?
 
-Gipetto takes the money and walks off. The old woman steps up 
-to the table.
+VELHA SENHORA
+Bem, eu tenho um burro falante.
 
-HEAD GUARD
-Next! What have you got?
+CHEFE DA GUARDA
+Certo. Bem, isso vale dez xelins, 
+se você puder provar.
 
-OLD WOMAN
-Well, I've got a talking donkey.
+VELHA SENHORA
+Ah, vá em frente, amiguinho.
 
-HEAD GUARD
-Right. Well, that's good for ten shillings, 
-if you can prove it.
+Burro apenas olha para ela.
 
-OLD WOMAN
-Oh, go ahead, little fella.
+CHEFE DA GUARDA
+E então?
 
-Donkey just looks up at her.
+VELHA SENHORA
+Ah, oh, ele está apenas... ele está apenas um pouco 
+nervoso. Ele é realmente muito tagarela. 
+Fale, seu idiota cabeça-dura...
 
-HEAD GUARD
-Well?
+CHEFE DA GUARDA
+É isso. Já ouvi o suficiente. Guardas!
 
-OLD WOMAN
-Oh, oh, he's just...he's just a little 
-nervous. He's really quite a chatterbox. 
-Talk, you boneheaded dolt...
+VELHA SENHORA
+Não, não, ele fala! Ele fala sim. (finge 
+ser o Burro) Eu sei falar. Eu amo 
+falar. Eu sou a coisa mais falante 
+que você já viu.
 
-HEAD GUARD
-That's it. I've heard enough. Guards!
+CHEFE DA GUARDA
+Tirem-na da minha vista.
 
+VELHA SENHORA
+Não, não! Eu juro! Oh! Ele sabe falar!
 
-OLD WOMAN
-No, no, he talks! He does. (pretends 
-to be Donkey) I can talk. I love to 
-talk. I'm the talkingest damn thing 
-you ever saw.
+Os guardas agarram a velha senhora e ela luta com eles. Uma 
+de suas pernas voa e chuta Sininho das mãos de Peter Pan, 
+e sua gaiola cai na cabeça do Burro. Ele é polvilhado 
+com pó de fada e consegue voar.
 
-HEAD GUARD
-Get her out of my sight.
-
-OLD WOMAN
-No, no! I swear! Oh! He can talk!
-
-The guards grab the old woman and she struggles with them. One 
-of her legs flies out and kicks Tinkerbell out of Peter Pan's 
-hands, and her cage drops on Donkey's head. He gets sprinkled 
-with fairy dust and he's able to fly.
-
-DONKEY
-Hey! I can fly!
+BURRO
+Ei! Eu posso voar!
 
 PETER PAN
-He can fly!
+Ele pode voar!
 
-3 LITTLE PIGS
-He can fly!
+3 PORQUINHOS
+Ele pode voar!
 
-HEAD GUARD
-He can talk!
+CHEFE DA GUARDA
+Ele pode falar!
 
-DONKEY
-Ha, ha! That's right, fool! Now I'm 
-a flying, talking donkey. You might 
-have seen a housefly, maybe even a superfly 
-but I bet you ain't never seen a donkey 
-fly. Ha, ha! (the pixie dust begins 
-to wear off) Uh-oh. (he begins to sink 
-to the ground.)
+BURRO
+Ha, ha! É isso aí, otário! Agora eu sou 
+um burro voador e falante. Você pode 
+ter visto uma mosca doméstica, talvez até uma super mosca, 
+mas aposto que nunca viu um burro 
+voar. Ha, ha! (o pó de pirlimpimpim começa 
+a passar) Uh-oh. (ele começa a afundar 
+em direção ao chão.)
 
-He hits the ground with a thud.
+Ele atinge o chão com um baque.
 
-HEAD GUARD
-Seize him! (Donkey takes of running.) 
-After him!
+CHEFE DA GUARDA
+Peguem-no! (Burro sai correndo.) 
+Atrás dele!
 
-GUARDS
-He's getting away! Get him! This way! 
-Turn!
+GUARDAS
+Ele está fugindo! Peguem ele! Por aqui! 
+Virem!
 
-Donkey keeps running and he eventually runs into Shrek. Literally. 
-Shrek turns around to see who bumped into him. Donkey looks scared 
-for a moment then he spots the guards coming up the path. He 
-quickly hides behind Shrek.
+Burro continua correndo e eventualmente esbarra em Shrek. Literalmente. 
+Shrek se vira para ver quem esbarrou nele. Burro parece assustado 
+por um momento, então avista os guardas subindo o caminho. Ele 
+rapidamente se esconde atrás de Shrek.
 
-HEAD GUARD
-You there. Ogre!
-
-SHREK
-Aye?
-
-HEAD GUARD
-By the order of Lord Farquaad I am authorized 
-to place you both under arrest and transport 
-you to a designated resettlement facility.
-
+CHEFE DA GUARDA
+Você aí. Ogro!
 
 SHREK
-Oh, really? You and what army?
+Sim?
 
-He looks behind the guard and the guard turns to look as well 
-and we see that the other men have run off. The guard tucks tail 
-and runs off. Shrek laughs and goes back about his business and 
-begins walking back to his cottage.
-
-DONKEY
-Can I say something to you? Listen, 
-you was really, really, really somethin' 
-back here. Incredible!
+CHEFE DA GUARDA
+Por ordem de Lorde Farquaad, estou autorizado 
+a colocar ambos sob prisão e transportá-los 
+para uma instalação de reassentamento designada.
 
 SHREK
-Are you talkin' to...(he turns around 
-and Donkey is gone) me? (he turns back 
-around and Donkey is right in front 
-of him.) Whoa!
+Ah, é mesmo? Você e que exército?
 
-DONKEY
-Yes. I was talkin' to you. Can I tell 
-you that you that you was great back 
-here? Those guards! They thought they 
-was all of that. Then you showed up, 
-and bam! They was trippin' over themselves 
-like babes in the woods. That really 
-made me feel good to see that.
+Ele olha para trás do guarda e o guarda se vira para olhar também 
+e vemos que os outros homens fugiram. O guarda coloca o rabo entre as pernas 
+e foge. Shrek ri e volta a cuidar de sua vida e 
+começa a caminhar de volta para sua cabana.
+
+BURRO
+Posso te dizer uma coisa? Escuta, 
+você foi realmente, realmente, realmente incrível 
+lá atrás. Incrível!
 
 SHREK
-Oh, that's great. Really.
+Você está falando co...(ele se vira 
+e o Burro sumiu) comigo? (ele se vira de volta 
+e o Burro está bem na frente 
+dele.) Opa!
 
-DONKEY
-Man, it's good to be free.
-
-SHREK
-Now, why don't you go celebrate your 
-freedom with your own friends? Hmm?
-
-
-DONKEY
-But, uh, I don't have any friends. And 
-I'm not goin' out there by myself. Hey, 
-wait a minute! I got a great idea! I'll 
-stick with you. You're mean, green, 
-fightin' machine. Together we'll scare 
-the spit out of anybody that crosses 
-us.
-
-Shrek turns and regards Donkey for a moment before roaring very 
-loudly.
-
-DONKEY
-Oh, wow! That was really scary. If you 
-don't mind me sayin', if that don't 
-work, your breath certainly will get 
-the job done, 'cause you definitely 
-need some Tic Tacs or something, 'cause 
-you breath stinks! You almost burned 
-the hair outta my nose, just like the 
-time...(Shrek covers his mouth but Donkey 
-continues to talk, so Shrek removes 
-his hand.) ...then I ate some rotten 
-berries. I had strong gases leaking 
-out of my butt that day.
+BURRO
+Sim. Eu estava falando com você. Posso te dizer 
+que você foi ótimo lá 
+atrás? Aqueles guardas! Eles pensavam que 
+eram os tais. Então você apareceu, 
+e bam! Eles estavam tropeçando em si mesmos 
+como bebês na floresta. Isso realmente 
+me fez sentir bem de ver.
 
 SHREK
-Why are you following me?
+Ah, que ótimo. Sério.
 
-DONKEY
-I'll tell you why. (singing) 'Cause 
-I'm all alone, There's no one here beside 
-me, My problems have all gone, There's 
-no one to deride me, But you gotta have 
-faith...
+BURRO
+Cara, é bom ser livre.
 
 SHREK
-Stop singing! It's no wonder you don't 
-have any friends.
+Agora, por que você não vai celebrar sua 
+liberdade com seus próprios amigos? Hmm?
 
-DONKEY
-Wow. Only a true friend would be that 
-cruelly honest.
+BURRO
+Mas, uh, eu não tenho amigos. E 
+eu não vou lá fora sozinho. Ei, 
+espere um minuto! Tive uma ótima ideia! Eu vou 
+ficar com você. Você é uma máquina de luta 
+verde e malvada. Juntos vamos assustar 
+qualquer um que cruzar nosso caminho.
+
+Shrek se vira e olha para o Burro por um momento antes de rugir muito 
+alto.
+
+BURRO
+Oh, uau! Isso foi realmente assustador. Se você 
+não se importa que eu diga, se isso não 
+funcionar, seu hálito certamente fará 
+o serviço, porque você definitivamente 
+precisa de umas balas de menta ou algo assim, porque 
+seu hálito fede! Você quase queimou 
+os pelos do meu nariz, igual àquela 
+vez...(Shrek cobre a boca dele mas Burro 
+continua a falar, então Shrek remove 
+a mão.) ...então eu comi umas frutas podres. 
+Eu tive gases fortes vazando 
+da minha bunda naquele dia.
 
 SHREK
-Listen, little donkey. Take a look at 
-me. What am I?
+Por que você está me seguindo?
 
-DONKEY
-(looks all the way up at Shrek) Uh ...really 
-tall?
-
-SHREK
-No! I'm an ogre! You know. "Grab your 
-torch and pitchforks." Doesn't that 
-bother you?
-
-DONKEY
-Nope.
+BURRO
+Eu vou te dizer por quê. (cantando) Porque 
+eu estou sozinho, não há ninguém aqui ao meu lado, 
+meus problemas se foram, não há 
+ninguém para zombar de mim, mas você tem que ter 
+fé...
 
 SHREK
-Really?
+Pare de cantar! Não é à toa que você não 
+tem amigos.
 
-DONKEY
-Really, really.
+BURRO
+Uau. Apenas um verdadeiro amigo seria tão 
+cruelmente honesto.
+
+SHREK
+Escute, burrinho. Olhe para 
+mim. O que eu sou?
+
+BURRO
+(olha todo o caminho para cima para Shrek) Uh... muito 
+alto?
+
+SHREK
+Não! Eu sou um ogro! Você sabe. "Peguem suas 
+tochas e forcados." Isso não 
+te incomoda?
+
+BURRO
+Não.
+
+SHREK
+Sério?
+
+BURRO
+Sério, sério.
 
 SHREK
 Oh.
 
-DONKEY
-Man, I like you. What's you name?
+BURRO
+Cara, eu gosto de você. Qual é seu nome?
 
 SHREK
 Uh, Shrek.
 
-DONKEY
-Shrek? Well, you know what I like about 
-you, Shrek? You got that kind of I-don't-care-what-nobody-thinks-of-me 
-thing. I like that. I respect that, 
-Shrek. You all right. (They come over 
-a hill and you can see Shrek's cottage.) 
-Whoa! Look at that. Who'd want to live 
-in place like that?
+BURRO
+Shrek? Bem, sabe o que eu gosto em 
+você, Shrek? Você tem aquele tipo de coisa de 
+eu-não-ligo-para-o-que-ninguém-pensa-de-mim. 
+Eu gosto disso. Eu respeito isso, 
+Shrek. Você é legal. (Eles passam por 
+uma colina e você pode ver a cabana de Shrek.) 
+Uau! Olha só isso. Quem gostaria de morar 
+em um lugar assim?
 
 SHREK
-That would be my home.
+Aí seria a minha casa.
 
-DONKEY
-Oh! And it is lovely! Just beautiful. 
-You know you are quite a decorator. 
-It's amazing what you've done with such 
-a modest budget. I like that boulder. 
-That is a nice boulder. I guess you 
-don't entertain much, do you?
-
-SHREK
-I like my privacy.
-
-DONKEY
-You know, I do too. That's another thing 
-we have in common. Like I hate it when 
-you got somebody in your face. You've 
-trying to give them a hint, and they 
-won't leave. There's that awkward silence. 
-(awkward silence) Can I stay with you?
-
+BURRO
+Oh! E é adorável! Simplesmente lindo. 
+Sabe, você é um grande decorador. 
+É incrível o que você fez com um 
+orçamento tão modesto. Eu gosto daquela pedra. 
+É uma bela pedra. Eu acho que você 
+não recebe muitas visitas, recebe?
 
 SHREK
-Uh, what?
+Eu gosto da minha privacidade.
 
-DONKEY
-Can I stay with you, please?
-
-SHREK
-(sarcastically) Of course!
-
-DONKEY
-Really?
-
-SHREK
-No.
-
-DONKEY
-Please! I don't wanna go back there! 
-You don't know what it's like to be 
-considered a freak. (pause while he 
-looks at Shrek) Well, maybe you do. 
-But that's why we gotta stick together. 
-You gotta let me stay! Please! Please!
-
+BURRO
+Sabe, eu também. Essa é outra coisa 
+que temos em comum. Tipo, eu odeio quando 
+tem alguém na sua cara. Você está 
+tentando dar uma dica, e eles 
+não vão embora. Fica aquele silêncio estranho. 
+(silêncio estranho) Posso ficar com você?
 
 SHREK
-Okay! Okay! But one night only.
+Uh, o quê?
 
-DONKEY
-Ah! Thank you! (he runs inside the cottage)
-
+BURRO
+Posso ficar com você, por favor?
 
 SHREK
-What are you...? (Donkey hops up onto 
-a chair.) No! No!
+(sarcasticamente) Claro!
 
-DONKEY
-This is gonna be fun! We can stay up 
-late, swappin' manly stories, and in 
-the mornin' I'm makin' waffles.
+BURRO
+Sério?
+
+SHREK
+Não.
+
+BURRO
+Por favor! Eu não quero voltar para lá! 
+Você não sabe como é ser 
+considerado uma aberração. (pausa enquanto ele 
+olha para Shrek) Bem, talvez você saiba. 
+Mas é por isso que temos que ficar juntos. 
+Você tem que me deixar ficar! Por favor! Por favor!
+
+SHREK
+Ok! Ok! Mas só por uma noite.
+
+BURRO
+Ah! Obrigado! (ele corre para dentro da cabana)
+
+SHREK
+O que você está...? (Burro pula em 
+uma cadeira.) Não! Não!
+
+BURRO
+Isso vai ser divertido! Podemos ficar acordados 
+até tarde, trocando histórias másculas, e de 
+manhã eu faço waffles.
 
 SHREK
 Oh!
 
-DONKEY
-Where do, uh, I sleep?
+BURRO
+Onde, uh, eu durmo?
 
 SHREK
-(irritated) Outside!
+(irritado) Lá fora!
 
-DONKEY
-Oh, well, I guess that's cool. I mean, 
-I don't know you, and you don't know 
-me, so I guess outside is best, you 
-know. Here I go. Good night. (Shrek 
-slams the door.) (sigh) I mean, I do 
-like the outdoors. I'm a donkey. I was 
-born outside. I'll just be sitting by 
-myself outside, I guess, you know. By 
-myself, outside. I'm all alone...there's 
-no one here beside me...
+BURRO
+Ah, bem, acho que tudo bem. Quero dizer, 
+eu não te conheço, e você não me conhece, 
+então acho que lá fora é melhor, você 
+sabe. Lá vou eu. Boa noite. (Shrek 
+bate a porta.) (suspiro) Quero dizer, eu 
+gosto do ar livre. Eu sou um burro. Eu 
+nasci lá fora. Vou ficar sentado 
+sozinho lá fora, eu acho, sabe. 
+Sozinho, lá fora. Estou todo sozinho... não há 
+ninguém aqui ao meu lado...
 
-SHREK'S COTTAGE - NIGHT
+CABANA DE SHREK - NOITE
 
-Shrek is getting ready for dinner. He sits himself down and lights 
-a candle made out of earwax. He begins to eat when he hears a 
-noise. He stands up with a huff.
+Shrek está se preparando para o jantar. Ele se senta e acende 
+uma vela feita de cera de ouvido. Ele começa a comer quando ouve um 
+barulho. Ele se levanta com um bufo.
 
 SHREK
-(to Donkey) I thought I told you to 
-stay outside.
+(para Burro) Eu pensei ter te dito para 
+ficar lá fora.
 
-DONKEY
-(from the window) I am outside.
+BURRO
+(da janela) Eu estou lá fora.
 
-There is another noise and Shrek turns to find the person that 
-made the noise. He sees several shadows moving. He finally turns 
-and spots 3 blind mice on his table.
+Há outro barulho e Shrek se vira para encontrar a pessoa que 
+fez o barulho. Ele vê várias sombras se movendo. Ele finalmente se vira 
+e avista 3 ratos cegos em sua mesa.
 
-BLIND MOUSE1
-Well, gents, it's a far cry from the 
-farm, but what choice do we have?
+RATO CEGO 1
+Bem, senhores, está muito longe da 
+fazenda, mas que escolha nós temos?
 
-
-BLIND MOUSE2
-It's not home, but it'll do just fine.
-
+RATO CEGO 2
+Não é casa, mas vai servir muito bem.
 
 GORDO
-(bouncing on a slug) What a lovely bed.
-
+(pulando em uma lesma) Que cama adorável.
 
 SHREK
-Got ya. (Grabs a mouse, but it escapes 
-and lands on his shoulder.)
+Peguei vocês. (Agarra um rato, mas ele escapa 
+e pousa em seu ombro.)
 
 GORDO
-I found some cheese. (bites Shrek's 
-ear)
+Eu achei um pouco de queijo. (morde a orelha 
+do Shrek)
 
 SHREK
-Ow!
+Ai!
 
 GORDO
-Blah! Awful stuff.
+Eca! Coisa horrível.
 
-BLIND MOUSE1
-Is that you, Gordo?
+RATO CEGO 1
+É você, Gordo?
 
 GORDO
-How did you know?
+Como você sabia?
 
 SHREK
-Enough! (he grabs the 3 mice) What are 
-you doing in my house? (He gets bumped 
-from behind and he drops the mice.) 
-Hey! (he turns and sees the Seven Dwarves 
-with Snow White on the table.) Oh, no, 
-no, no. Dead broad off the table.
+Chega! (ele agarra os 3 ratos) O que vocês 
+estão fazendo na minha casa? (Ele leva um empurrão 
+por trás e deixa cair os ratos.) 
+Ei! (ele se vira e vê os Sete Anões 
+com a Branca de Neve na mesa.) Oh, não, 
+não, não. Tira a defunta da mesa.
 
-
-DWARF
-Where are we supposed to put her? The 
-bed's taken.
-
-SHREK
-Huh?
-
-Shrek marches over to the bedroom and throws back the curtain. 
-The Big Bad Wolf is sitting in the bed. The wolf just looks at 
-him.
-
-BIG BAD WOLF
-What?
-
-TIME LAPSE
-
-Shrek now has the Big Bad Wolf by the collar and is dragging 
-him to the front door.
+ANÃO
+Onde devemos colocá-la? A 
+cama está ocupada.
 
 SHREK
-I live in a swamp. I put up signs. I'm 
-a terrifying ogre! What do I have to 
-do get a little privacy? (He opens the 
-front door to throw the Wolf out and 
-he sees that all the collected Fairy 
-Tale Creatures are on his land.) Oh, 
-no. No! No!
+Hã?
 
-The 3 bears sit around the fire, the pied piper is playing his 
-pipe and the rats are all running to him, some elves are directing 
-flight traffic so that the fairies and witches can land...etc.
+Shrek marcha até o quarto e abre a cortina. 
+O Lobo Mau está sentado na cama. O lobo apenas olha para 
+ele.
 
+LOBO MAU
+O quê?
 
-SHREK
-What are you doing in my swamp? (this 
-echoes and everyone falls silent.)
+LAPSO DE TEMPO
 
-
-Gasps are heard all around. The 3 good fairies hide inside a 
-tent.
+Shrek agora tem o Lobo Mau pelo colarinho e o está arrastando 
+para a porta da frente.
 
 SHREK
-All right, get out of here. All of you, 
-move it! Come on! Let's go! Hapaya! 
-Hapaya! Hey! Quickly. Come on! (more 
-dwarves run inside the house) No, no! 
-No, no. Not there. Not there. (they 
-shut the door on him) Oh! (turns to 
-look at Donkey)
+Eu moro num pântano. Eu coloquei placas. Eu sou 
+um ogro aterrorizante! O que eu tenho que 
+fazer para ter um pouco de privacidade? (Ele abre a 
+porta da frente para jogar o Lobo para fora e 
+vê que todas as Criaturas de Contos de Fadas 
+coletadas estão em suas terras.) Oh, 
+não. Não! Não!
 
-DONKEY
-Hey, don't look at me. I didn't invite 
-them.
-
-PINOCCHIO
-Oh, gosh, no one invited us.
+Os 3 ursos sentam ao redor da fogueira, o flautista está tocando sua 
+flauta e os ratos estão todos correndo para ele, alguns elfos estão direcionando 
+o tráfego de voo para que as fadas e bruxas possam pousar... etc.
 
 SHREK
-What?
+O que vocês estão fazendo no meu pântano? (isso 
+ecoa e todos ficam em silêncio.)
 
-PINOCCHIO
-We were forced to come here.
-
-SHREK
-(flabbergasted) By who?
-
-LITTLE PIG
-Lord Farquaad. He huffed and he puffed 
-and he...signed an eviction notice.
-
+Suspiros são ouvidos por toda parte. As 3 fadas boas se escondem dentro de uma 
+tenda.
 
 SHREK
-(heavy sigh) All right. Who knows where 
-this Farquaad guy is?
+Tudo bem, saiam daqui. Todos vocês, 
+movam-se! Vamos! Vamos embora! Hapaya! 
+Hapaya! Ei! Rápido. Vamos! (mais 
+anões correm para dentro da casa) Não, não! 
+Não, não. Aí não. Aí não. (eles 
+fecham a porta na cara dele) Oh! (se vira para 
+olhar para o Burro)
 
-Everyone looks around at each other but no one answers.
+BURRO
+Ei, não olhe para mim. Eu não os convidei.
 
-DONKEY
-Oh, I do. I know where he is.
-
-SHREK
-Does anyone else know where to find 
-him? Anyone at all?
-
-DONKEY
-Me! Me!
-
-SHREK
-Anyone?
-
-DONKEY
-Oh! Oh, pick me! Oh, I know! I know! 
-Me, me!
+PINÓQUIO
+Oh, puxa, ninguém nos convidou.
 
 SHREK
-(sigh) Okay, fine. Attention, all fairy 
-tale things. Do not get comfortable. 
-Your welcome is officially worn out. 
-In fact, I'm gonna see this guy Farquaad 
-right now and get you all off my land 
-and back where you came from! (Pause. 
-Then the crowd goes wild.) Oh! (to Donkey) 
-You! You're comin' with me.
+O quê?
 
-DONKEY
-All right, that's what I like to hear, 
-man. Shrek and Donkey, two stalwart 
-friends, off on a whirlwind big-city 
-adventure. I love it!
-
-DONKEY
-(singing) On the road again. Sing it 
-with me, Shrek. I can't wait to get 
-on the road again.
+PINÓQUIO
+Fomos forçados a vir aqui.
 
 SHREK
-What did I say about singing?
+(pasmo) Por quem?
 
-DONKEY
-Can I whistle?
-
-SHREK
-No.
-
-DONKEY
-Can I hum it?
+PORQUINHO
+Lorde Farquaad. Ele bufou e soprou 
+e ele... assinou uma ordem de despejo.
 
 SHREK
-All right, hum it.
+(suspiro pesado) Tudo bem. Quem sabe onde 
+esse tal de Farquaad está?
 
-Donkey begins to hum 'On the Road Again'.
+Todos olham uns para os outros mas ninguém responde.
 
-DULOC - KITCHEN
+BURRO
+Oh, eu sei. Eu sei onde ele está.
 
-A masked man is torturing the Gingerbread Man. He's continually 
-dunking him in a glass of milk. Lord Farquaad walks in.
+SHREK
+Mais alguém sabe onde encontrá-lo? 
+Alguém?
 
-FARQUAAD
-That's enough. He's ready to talk.
+BURRO
+Eu! Eu!
 
+SHREK
+Alguém?
 
-The Gingerbread Man is pulled out of the milk and slammed down 
-onto a cookie sheet. Farquaad laughs as he walks over to the 
-table. However when he reaches the table we see that it goes 
-up to his eyes. He clears his throat and the table is lowered.
+BURRO
+Oh! Oh, me escolha! Oh, eu sei! Eu sei! 
+Eu, eu!
 
+SHREK
+(suspiro) Ok, tudo bem. Atenção, todas as coisas 
+de contos de fadas. Não fiquem confortáveis. 
+Sua estadia está oficialmente encerrada. 
+Na verdade, eu vou ver esse tal Farquaad 
+agora mesmo e tirar todos vocês das minhas terras 
+e mandar de volta de onde vieram! (Pausa. 
+Então a multidão vai à loucura.) Oh! (para o Burro) 
+Você! Você vem comigo.
 
-FARQUAAD
-(he picks up the Gingerbread Man's legs 
-and plays with them) Run, run, run, 
-as fast as you can. You can't catch 
-me. I'm the gingerbread man.
+BURRO
+Tudo bem, é isso que eu gosto de ouvir, 
+cara. Shrek e Burro, dois amigos 
+leais, partindo em uma aventura turbulenta na cidade grande. 
+Eu adoro!
 
-GINGERBREAD MAN
-You are a monster.
+BURRO
+(cantando) Na estrada novamente. Cante 
+comigo, Shrek. Mal posso esperar para colocar 
+o pé na estrada novamente.
 
-FARQUAAD
-I'm not the monster here. You are. You 
-and the rest of that fairy tale trash, 
-poisoning my perfect world. Now, tell 
-me! Where are the others?
+SHREK
+O que eu disse sobre cantar?
 
-GINGERBREAD MAN
-Eat me! (He spits milk into Farquaad's 
-eye.)
+BURRO
+Posso assobiar?
 
-FARQUAAD
-I've tried to be fair to you creatures. 
-Now my patience has reached its end! 
-Tell me or I'll...(he makes as if to 
-pull off the Gingerbread Man's buttons)
+SHREK
+Não.
 
+BURRO
+Posso cantarolar?
 
-GINGERBREAD MAN
-No, no, not the buttons. Not my gumdrop 
-buttons.
+SHREK
+Tudo bem, cantarole.
 
-FARQUAAD
-All right then. Who's hiding them?
+Burro começa a cantarolar 'On the Road Again'.
 
+DULOC - COZINHA
 
-GINGERBREAD MAN
-Okay, I'll tell you. Do you know the 
-muffin man?
-
-FARQUAAD
-The muffin man?
-
-GINGERBREAD MAN
-The muffin man.
-
-FARQUAAD
-Yes, I know the muffin man, who lives 
-on Drury Lane?
-
-GINGERBREAD MAN
-Well, she's married to the muffin man.
-
+Um homem mascarado está torturando o Biscoito. Ele está continuamente 
+mergulhando-o em um copo de leite. Lorde Farquaad entra.
 
 FARQUAAD
-The muffin man?
+Já chega. Ele está pronto para falar.
 
-GINGERBREAD MAN
-The muffin man!
-
-FARQUAAD
-She's married to the muffin man.
-
-The door opens and the Head Guard walks in.
-
-HEAD GUARD
-My lord! We found it.
+O Biscoito é puxado para fora do leite e jogado 
+em uma assadeira. Farquaad ri enquanto caminha até a 
+mesa. No entanto, quando ele chega à mesa, vemos que ela vai 
+até seus olhos. Ele limpa a garganta e a mesa é abaixada.
 
 FARQUAAD
-Then what are you waiting for? Bring 
-it in.
+(ele pega as pernas do Biscoito 
+e brinca com elas) Corra, corra, corra, 
+o mais rápido que puder. Você não pode me pegar. 
+Eu sou o homem biscoito.
 
-More guards enter carrying something that is covered by a sheet. 
-They hang up whatever it is and remove the sheet. It is the Magic 
-Mirror.
-
-GINGERBREAD MAN
-(in awe) Ohhhh...
+BISCOITO
+Você é um monstro.
 
 FARQUAAD
-Magic mirror...
+Eu não sou o monstro aqui. Você é. Você 
+e o resto daquele lixo de conto de fadas, 
+envenenando meu mundo perfeito. Agora, me diga! 
+Onde estão os outros?
 
-GINGERBREAD MAN
-Don't tell him anything! (Farquaad picks 
-him up and dumps him into a trash can 
-with a lid.) No!
-
-FARQUAAD
-Evening. Mirror, mirror on the wall. 
-Is this not the most perfect kingdom 
-of them all?
-
-MIRROR
-Well, technically you're not a king.
-
+BISCOITO
+Me coma! (Ele cospe leite no olho de Farquaad.)
 
 FARQUAAD
-Uh, Thelonius. (Thelonius holds up a 
-hand mirror and smashes it with his 
-fist.) You were saying?
+Eu tentei ser justo com vocês criaturas. 
+Agora minha paciência chegou ao fim! 
+Me diga ou eu vou...(ele faz menção de 
+arrancar os botões do Biscoito)
 
-MIRROR
-What I mean is you're not a king yet. 
-But you can become one. All you have 
-to do is marry a princess.
-
-FARQUAAD
-Go on.
-
-MIRROR
-(chuckles nervously) So, just sit back 
-and relax, my lord, because it's time 
-for you to meet today's eligible bachelorettes. 
-And here they are! Bachelorette number 
-one is a mentally abused shut-in from 
-a kingdom far, far away. She likes sushi 
-and hot tubbing anytime. Her hobbies 
-include cooking and cleaning for her 
-two evil sisters. Please welcome Cinderella. 
-(shows picture of Cinderella) Bachelorette 
-number two is a cape-wearing girl from 
-the land of fancy. Although she lives 
-with seven other men, she's not easy. 
-Just kiss her dead, frozen lips and 
-find out what a live wire she is. Come 
-on. Give it up for Snow White! (shows 
-picture of Snow White) And last, but 
-certainly not last, bachelorette number 
-three is a fiery redhead from a dragon-guarded 
-castle surrounded by hot boiling lava! 
-But don't let that cool you off. She's 
-a loaded pistol who likes pina colads 
-and getting caught in the rain. Yours 
-for the rescuing, Princess Fiona! (Shows 
-picture of Princess Fiona) So will it 
-be bachelorette number one, bachelorette 
-number two or bachelorette number three?
-
-
-GUARDS
-Two! Two! Three! Three! Two! Two! Three!
-
+BISCOITO
+Não, não, os botões não. Meus botões 
+de goma não.
 
 FARQUAAD
-Three? One? Three?
+Muito bem então. Quem os está escondendo?
+
+BISCOITO
+Ok, eu vou te contar. Você conhece o 
+padeiro?
+
+FARQUAAD
+O padeiro?
+
+BISCOITO
+O padeiro.
+
+FARQUAAD
+Sim, eu conheço o padeiro, que mora 
+na Rua da Farinha?
+
+BISCOITO
+Bem, ela é casada com o padeiro.
+
+FARQUAAD
+O padeiro?
+
+BISCOITO
+O padeiro!
+
+FARQUAAD
+Ela é casada com o padeiro.
+
+A porta se abre e o Chefe da Guarda entra.
+
+CHEFE DA GUARDA
+Meu senhor! Encontramos.
+
+FARQUAAD
+Então o que você está esperando? Traga.
+
+Mais guardas entram carregando algo que está coberto por um lençol. 
+Eles penduram o que quer que seja e removem o lençol. É o Espelho 
+Mágico.
+
+BISCOITO
+(maravilhado) Ohhhh...
+
+FARQUAAD
+Espelho mágico...
+
+BISCOITO
+Não conte nada a ele! (Farquaad pega 
+ele e o joga em uma lata de lixo 
+com tampa.) Não!
+
+FARQUAAD
+Boa noite. Espelho, espelho meu. 
+Este não é o reino mais perfeito 
+de todos?
+
+ESPELHO
+Bem, tecnicamente você não é um rei.
+
+FARQUAAD
+Uh, Thelonius. (Thelonius segura um 
+espelho de mão e o quebra com o 
+punho.) Você estava dizendo?
+
+ESPELHO
+O que eu quero dizer é que você não é rei ainda. 
+Mas você pode se tornar um. Tudo o que você tem 
+que fazer é se casar com uma princesa.
+
+FARQUAAD
+Continue.
+
+ESPELHO
+(ri nervosamente) Então, apenas sente-se 
+e relaxe, meu senhor, porque é hora 
+de você conhecer as solteiras elegíveis de hoje. 
+E aqui estão elas! A solteira número 
+um é uma reclusa mentalmente abusada de 
+um reino muito, muito distante. Ela gosta de sushi 
+e banheira de hidromassagem a qualquer hora. Seus hobbies 
+incluem cozinhar e limpar para suas 
+duas irmãs malvadas. Por favor, deem as boas-vindas à Cinderela. 
+(mostra foto da Cinderela) A solteira 
+número dois é uma garota que usa capa da 
+terra da fantasia. Embora ela more 
+com sete outros homens, ela não é fácil. 
+Apenas beije seus lábios mortos e congelados e 
+descubra que fio desencapado ela é. Vamos. 
+Aplausos para a Branca de Neve! (mostra 
+foto da Branca de Neve) E por último, mas 
+certamente não menos importante, a solteira número 
+três é uma ruiva impetuosa de um castelo guardado por dragão 
+cercado por lava fervente! 
+Mas não deixe isso te esfriar. Ela é 
+uma pistola carregada que gosta de pina coladas 
+e de ser pega na chuva. Sua 
+para o resgate, Princesa Fiona! (Mostra 
+foto da Princesa Fiona) Então, será 
+a solteira número um, solteira 
+número dois ou solteira número três?
+
+GUARDAS
+Dois! Dois! Três! Três! Dois! Dois! Três!
+
+FARQUAAD
+Três? Um? Três?
 
 THELONIUS
-Three! (holds up 2 fingers) Pick number 
-three, my lord!
+Três! (levanta 2 dedos) Escolha a número 
+três, meu senhor!
 
 FARQUAAD
-Okay, okay, uh, number three!
+Ok, ok, uh, número três!
 
-MIRROR
-Lord Farquaad, you've chosen Princess 
+ESPELHO
+Lorde Farquaad, você escolheu a Princesa 
 Fiona.
 
 FARQUAAD
-Princess Fiona. She's perfect. All I 
-have to do is just find someone who 
-can go...
+Princesa Fiona. Ela é perfeita. Tudo o que 
+eu tenho que fazer é encontrar alguém que 
+possa ir...
 
-MIRROR
-But I probably should mention the little 
-thing that happens at night.
-
-FARQUAAD
-I'll do it.
-
-MIRROR
-Yes, but after sunset...
+ESPELHO
+Mas eu provavelmente deveria mencionar a pequena 
+coisa que acontece à noite.
 
 FARQUAAD
-Silence! I will make this Princess Fiona 
-my queen, and DuLoc will finally have 
-the perfect king! Captain, assemble 
-your finest men. We're going to have 
-a tournament. (smiles evilly)
+Eu farei isso.
 
-DuLoc Parking Lot - Lancelot Section
+ESPELHO
+Sim, mas depois do pôr do sol...
 
-Shrek and Donkey come out of the field that is right by the parking 
-lot. The castle itself is about 40 stories high.
+FARQUAAD
+Silêncio! Farei desta Princesa Fiona 
+minha rainha, e Duloc finalmente terá 
+o rei perfeito! Capitão, reúna 
+seus melhores homens. Vamos ter 
+um torneio. (sorri malignamente)
 
-DONKEY
-But that's it. That's it right there. 
-That's DuLoc. I told ya I'd find it.
+Estacionamento de Duloc - Seção Lancelot
 
+Shrek e Burro saem do campo que fica logo ao lado do estacionamento. 
+O castelo em si tem cerca de 40 andares de altura.
 
-SHREK
-So, that must be Lord Farquaad's castle.
-
-
-DONKEY
-Uh-huh. That's the place.
+BURRO
+Mas é isso. É isso aí mesmo. 
+Isso é Duloc. Eu te disse que encontraria.
 
 SHREK
-Do you think maybe he's compensating 
-for something? (He laughs, but then 
-groans as Donkey doesn't get the joke. 
-He continues walking through the parking 
-lot.)
+Então, esse deve ser o castelo de Lorde Farquaad.
 
-DONKEY
-Hey, wait. Wait up, Shrek.
-
-MAN
-Hurry, darling. We're late. Hurry.
-
+BURRO
+Uh-huh. Esse é o lugar.
 
 SHREK
-Hey, you! (The attendant, who is wearing 
-a giant head that looks like Lord Farquaad, 
-screams and begins running through the 
-rows of rope to get to the front gate 
-to get away from Shrek.) Wait a second. 
-Look, I'm not gonna eat you. I just 
-- - I just - - (He sighs and then begins 
-walking straight through the rows. The 
-attendant runs into a wall and falls 
-down. Shrek and Donkey look at him then 
-continue on into DuLoc.)
+Você acha que talvez ele esteja compensando 
+alguma coisa? (Ele ri, mas depois 
+geme porque o Burro não entende a piada. 
+Ele continua andando pelo estacionamento.)
+
+BURRO
+Ei, espere. Espere, Shrek.
+
+HOMEM
+Depressa, querida. Estamos atrasados. Depressa.
+
+SHREK
+Ei, você! (O atendente, que está usando 
+uma cabeça gigante que se parece com Lorde Farquaad, 
+grita e começa a correr pelas 
+filas de cordas para chegar ao portão da frente 
+para fugir de Shrek.) Espere um segundo. 
+Olha, eu não vou te comer. Eu só 
+- - Eu só - - (Ele suspira e então começa 
+a andar direto pelas filas. O 
+atendente bate em uma parede e cai. 
+Shrek e Burro olham para ele e depois 
+continuam para Duloc.)
 
 DULOC
 
-They look around but all is quiet.
+Eles olham em volta, mas tudo está quieto.
 
 SHREK
-It's quiet. Too quiet. Where is everybody?
+Está quieto. Quieto demais. Onde está todo mundo?
 
+BURRO
+Ei, olhe isso!
 
-DONKEY
-Hey, look at this!
+Burro corre e puxa uma alavanca que está presa a uma caixa 
+marcada 'Informações'. A música começa e as portas da caixa 
+se abrem. Há pequenas pessoas de madeira dentro e elas começam 
+a cantar.
 
-Donkey runs over and pulls a lever that is attached to a box 
-marked 'Information'. The music winds up and then the box doors 
-open up. There are little wooden people inside and they begin 
-to sing.
+PESSOAS DE MADEIRA
+Bem-vindo a Duloc, uma cidade tão perfeita
 
-WOODEN PEOPLE
-Welcome to DuLoc such a perfect town
+Aqui temos algumas regras
 
+Vamos estabelecê-las
 
-Here we have some rules
+Não faça ondas, fique na linha
 
-Let us lay them down
+E vamos nos dar bem
 
-Don't make waves, stay in line
+Duloc é um lugar perfeito
 
-And we'll get along fine
+Por favor, não pise na grama
 
-DuLoc is perfect place
+Engraxe seus sapatos, limpe seu... rosto
 
-Please keep off of the grass
+Duloc é, Duloc é
 
-Shine your shoes, wipe your... face
+Duloc é um lugar perfeito.
 
-DuLoc is, DuLoc is
+De repente, uma câmera tira uma foto de Burro e Shrek.
 
-DuLoc is perfect place.
-
-Suddenly a camera takes Donkey and Shrek's picture.
-
-DONKEY
-Wow! Let's do that again! (makes ready 
-to run over and pull the lever again)
-
+BURRO
+Uau! Vamos fazer isso de novo! (se prepara 
+para correr e puxar a alavanca novamente)
 
 SHREK
-(grabs Donkey's tail and holds him still) 
-No. No. No, no, no! No.
+(agarra o rabo do Burro e o segura) 
+Não. Não. Não, não, não! Não.
 
-They hear a trumpet fanfare and head over to the arena.
+Eles ouvem uma fanfarra de trombetas e se dirigem para a arena.
 
 FARQUAAD
-Brave knights. You are the best and 
-brightest in all the land. Today one 
-of you shall prove himself...
+Bravos cavaleiros. Vocês são os melhores e 
+mais brilhantes de toda a terra. Hoje um 
+de vocês provará a si mesmo...
 
-As Shrek and Donkey walk down the tunnel to get into the arena 
-Donkey is humming the DuLoc theme song.
+Enquanto Shrek e Burro caminham pelo túnel para entrar na arena, 
+Burro está cantarolando a música tema de Duloc.
 
 SHREK
-All right. You're going the right way 
-for a smacked bottom.
+Certo. Você está indo no caminho certo 
+para levar um tapa no traseiro.
 
-DONKEY
-Sorry about that.
+BURRO
+Desculpe por isso.
 
 FARQUAAD
-That champion shall have the honor - 
-- no, no - - the privilege to go forth 
-and rescue the lovely Princess Fiona 
-from the fiery keep of the dragon. If 
-for any reason the winner is unsuccessful, 
-the first runner-up will take his place 
-and so on and so forth. Some of you 
-may die, but it's a sacrifice I am willing 
-to make. (cheers) Let the tournament 
-begin! (He notices Shrek) Oh! What is 
-that? It's hideous!
+Aquele campeão terá a honra - 
+- não, não - - o privilégio de ir em frente 
+e resgatar a adorável Princesa Fiona 
+da torre de fogo do dragão. Se 
+por qualquer motivo o vencedor não tiver sucesso, 
+o segundo colocado ocupará seu lugar 
+e assim por diante. Alguns de vocês 
+podem morrer, mas é um sacrifício que estou disposto 
+a fazer. (aplausos) Que o torneio 
+comece! (Ele nota Shrek) Oh! O que é 
+aquilo? É horrível!
 
 SHREK
-(turns to look at Donkey and then back 
-at Farquaad) Ah, that's not very nice. 
-It's just a donkey.
+(se vira para olhar para o Burro e depois de volta 
+para Farquaad) Ah, isso não é muito legal. 
+É apenas um burro.
 
 FARQUAAD
-Indeed. Knights, new plan! The one who 
-kills the ogre will be named champion! 
-Have it him!
+De fato. Cavaleiros, novo plano! Aquele que 
+matar o ogro será nomeado campeão! 
+Peguem ele!
 
-MEN
-Get him!
-
-SHREK
-Oh, hey! Now come on! Hang on now. (bumps 
-into a table where there are mugs of 
-beer)
-
-CROWD
-Go ahead! Get him!
+HOMENS
+Peguem ele!
 
 SHREK
-(holds up a mug of beer) Can't we just 
-settle this over a pint?
+Oh, ei! Agora vamos lá! Espere aí. (bate 
+em uma mesa onde há canecas de 
+cerveja)
 
-CROWD
-Kill the beast!
-
-SHREK
-No? All right then. (drinks the beer) 
-Come on!
-
-He takes the mug and smashes the spigot off the large barrel 
-of beer behind him. The beer comes rushing out drenching the 
-other men and wetting the ground. It's like mud now. Shrek slides 
-past the men and picks up a spear that one of the men dropped. 
-As Shrek begins to fight Donkey hops up onto one of the larger 
-beer barrels. It breaks free of it's ropes and begins to roll. 
-Donkey manages to squish two men into the mud. There is so much 
-fighting going on here I'm not going to go into detail. Suffice 
-to say that Shrek kicks butt.
-
-DONKEY
-Hey, Shrek, tag me! Tag me!
-
-Shrek comes over and bangs a man's head up against Donkeys. Shrek 
-gets up on the ropes and interacts with the crowd.
+MULTIDÃO
+Vão em frente! Peguem ele!
 
 SHREK
-Yeah!
+(levanta uma caneca de cerveja) Não podemos apenas 
+resolver isso com uma cerveja?
 
-A man tries to sneak up behind Shrek, but Shrek turns in time 
-and sees him.
-
-WOMAN
-The chair! Give him the chair!
-
-Shrek smashes a chair over the guys back. Finally all the men 
-are down. Donkey kicks one of them in the helmet, and the ding 
-sounds the end of the match. The audience goes wild.
+MULTIDÃO
+Matem a besta!
 
 SHREK
-Oh, yeah! Ah! Ah! Thank you! Thank you 
-very much! I'm here till Thursday. Try 
-the veal! Ha, ha! (laughs)
+Não? Tudo bem então. (bebe a cerveja) 
+Venham!
 
-The laughter stops as all of the guards turn their weapons on 
+Ele pega a caneca e quebra a torneira do grande barril 
+de cerveja atrás dele. A cerveja sai correndo encharcando os 
+outros homens e molhando o chão. Está como lama agora. Shrek desliza 
+pelos homens e pega uma lança que um dos homens deixou cair. 
+Enquanto Shrek começa a lutar, Burro pula em um dos barris 
+maiores de cerveja. Ele se solta de suas cordas e começa a rolar. 
+Burro consegue esmagar dois homens na lama. Há tanta 
+luta acontecendo aqui que não vou entrar em detalhes. Basta 
+dizer que Shrek chuta traseiros.
+
+BURRO
+Ei, Shrek, troca comigo! Troca comigo!
+
+Shrek vem e bate a cabeça de um homem contra a do Burro. Shrek 
+sobe nas cordas e interage com a multidão.
+
+SHREK
+Isso aí!
+
+Um homem tenta se aproximar por trás de Shrek, mas Shrek se vira a tempo 
+e o vê.
+
+MULHER
+A cadeira! Dê-lhe a cadeira!
+
+Shrek quebra uma cadeira nas costas do cara. Finalmente todos os homens 
+estão no chão. Burro chuta um deles no capacete, e o gongo 
+soa o fim da partida. A plateia vai à loucura.
+
+SHREK
+Oh, sim! Ah! Ah! Obrigado! Obrigado 
+muito! Estou aqui até quinta-feira. Experimentem 
+a vitela! Ha, ha! (ri)
+
+O riso para quando todos os guardas apontam suas armas para 
 Shrek.
 
-HEAD GUARD
-Shall I give the order, sir?
+CHEFE DA GUARDA
+Devo dar a ordem, senhor?
 
 FARQUAAD
-No, I have a better idea. People of 
-DuLoc, I give you our champion!
+Não, eu tenho uma ideia melhor. Povo de 
+Duloc, eu lhes dou nosso campeão!
 
 SHREK
-What?
+O quê?
 
 FARQUAAD
-Congratulations, ogre. You're won the 
-honor of embarking on a great and noble 
-quest.
+Parabéns, ogro. Você ganhou a 
+honra de embarcar em uma grande e nobre 
+missão.
 
 SHREK
-Quest? I'm already in a quest, a quest 
-to get my swamp back.
+Missão? Já estou em uma missão, uma missão 
+para recuperar meu pântano.
 
 FARQUAAD
-Your swamp?
+Seu pântano?
 
 SHREK
-Yeah, my swamp! Where you dumped those 
-fairy tale creatures!
+Sim, meu pântano! Onde você despejou aquelas 
+criaturas de contos de fadas!
 
 FARQUAAD
-Indeed. All right, ogre. I'll make you 
-a deal. Go on this quest for me, and 
-I'll give you your swamp back.
+De fato. Muito bem, ogro. Farei um 
+acordo com você. Vá nesta missão por mim, e 
+eu lhe devolverei seu pântano.
 
 SHREK
-Exactly the way it was?
+Exatamente como era?
 
 FARQUAAD
-Down to the last slime-covered toadstool.
-
+Até o último cogumelo coberto de lodo.
 
 SHREK
-And the squatters?
+E os invasores?
 
 FARQUAAD
-As good as gone.
+Considere-os fora.
 
 SHREK
-What kind of quest?
+Que tipo de missão?
 
-Time Lapse - Donkey and Shrek are now walking through the field 
-heading away from DuLoc. Shrek is munching on an onion.
+Lapso de Tempo - Burro e Shrek estão agora caminhando pelo campo 
+se afastando de Duloc. Shrek está mastigando uma cebola.
 
-DONKEY
-Let me get this straight. You're gonna 
-go fight a dragon and rescue a princess 
-just so Farquaad will give you back 
-a swamp which you only don't have because 
-he filled it full of freaks in the first 
-place. Is that about right?
-
-SHREK
-You know, maybe there's a good reason 
-donkeys shouldn't talk.
-
-DONKEY
-I don't get it. Why don't you just pull 
-some of that ogre stuff on him? Throttle 
-him, lay siege to his fortress, grinds 
-his bones to make your bread, the whole 
-ogre trip.
+BURRO
+Deixe-me ver se entendi. Você vai 
+lutar com um dragão e resgatar uma princesa 
+só para Farquaad te devolver 
+um pântano que você só não tem porque 
+ele encheu de aberrações em primeiro 
+lugar. É isso mesmo?
 
 SHREK
-Oh, I know what. Maybe I could have 
-decapitated an entire village and put 
-their heads on a pike, gotten a knife, 
-cut open their spleen and drink their 
-fluids. Does that sound good to you?
+Sabe, talvez haja uma boa razão para 
+burros não falarem.
 
-
-DONKEY
-Uh, no, not really, no.
-
-SHREK
-For your information, there's a lot 
-more to ogres than people think.
-
-DONKEY
-Example?
+BURRO
+Eu não entendo. Por que você simplesmente não usa 
+aquela coisa de ogro nele? Estrangula 
+ele, cerca a fortaleza dele, mói 
+os ossos dele para fazer seu pão, toda 
+aquela viagem de ogro.
 
 SHREK
-Example? Okay, um, ogres are like onions. 
-(he holds out his onion)
+Oh, já sei. Talvez eu pudesse ter 
+decapitado uma vila inteira e colocado 
+suas cabeças em uma estaca, pego uma faca, 
+aberto seus baços e bebido seus 
+fluidos. Isso soa bem para você?
 
-DONKEY
-(sniffs the onion) They stink?
-
-SHREK
-Yes - - No!
-
-DONKEY
-They make you cry?
+BURRO
+Uh, não, na verdade não.
 
 SHREK
-No!
+Para sua informação, há muito 
+mais nos ogros do que as pessoas pensam.
 
-DONKEY
-You leave them in the sun, they get 
-all brown, start sproutin' little white 
-hairs.
-
-SHREK
-No! Layers! Onions have layers. Ogres 
-have layers! Onions have layers. You 
-get it? We both have layers. (he heaves 
-a sigh and then walks off)
-
-DONKEY
-(trailing after Shrek) Oh, you both 
-have layers. Oh. {Sniffs} You know, 
-not everybody likes onions. Cake! Everybody 
-loves cakes! Cakes have layers.
+BURRO
+Exemplo?
 
 SHREK
-I don't care... what everyone likes. 
-Ogres are not like cakes.
+Exemplo? Ok, hum, ogros são como cebolas. 
+(ele estende sua cebola)
 
-DONKEY
-You know what else everybody likes? 
-Parfaits. Have you ever met a person, 
-you say, "Let's get some parfait," they 
-say, "Hell no, I don't like no parfait"? 
-Parfaits are delicious.
+BURRO
+(cheira a cebola) Eles fedem?
 
 SHREK
-No! You dense, irritating, miniature 
-beast of burden! Ogres are like onions! 
-And of story. Bye-bye. See ya later.
+Sim - - Não!
 
-
-DONKEY
-Parfaits may be the most delicious thing 
-on the whole damn planet.
+BURRO
+Eles fazem você chorar?
 
 SHREK
-You know, I think I preferred your humming.
+Não!
 
-
-DONKEY
-Do you have a tissue or something? I'm 
-making a mess. Just the word parfait 
-make me start slobbering.
-
-They head off. There is a montage of their journey. Walking through 
-a field at sunset. Sleeping beneath a bright moon. Shrek trying 
-to put the campfire out the next day and having a bit of a problem, 
-so Donkey pees on the fire to put it out.
-
-DRAGON'S KEEP
-
-Shrek and Donkey are walking up to the keep that's supposed to 
-house Princess Fiona. It appears to look like a giant volcano.
-
-
-DONKEY
-(sniffs) Ohh! Shrek! Did you do that? 
-You gotta warn somebody before you just 
-crack one off. My mouth was open and 
-everything.
+BURRO
+Você os deixa no sol, eles ficam 
+marros, começam a brotar pelinhos brancos.
 
 SHREK
-Believe me, Donkey, if it was me, you'd 
-be dead. (sniffs) It's brimstone. We 
-must be getting close.
+Não! Camadas! Cebolas têm camadas. Ogros 
+têm camadas! Cebolas têm camadas. Você 
+entendeu? Nós dois temos camadas. (ele solta 
+um suspiro e vai embora)
 
-DONKEY
-Yeah, right, brimstone. Don't be talking 
-about it's the brimstone. I know what 
-I smell. It wasn't no brimstone. It 
-didn't come off no stone neither.
-
-
-They climb up the side of the volcano/keep and look down. There 
-is a small piece of rock right in the center and that is where 
-the castle is. It is surrounded by boiling lava. It looks very 
-foreboding.
+BURRO
+(seguindo Shrek) Ah, vocês dois 
+têm camadas. Ah. {Cheira} Sabe, 
+nem todo mundo gosta de cebola. Bolo! Todo mundo 
+ama bolos! Bolos têm camadas.
 
 SHREK
-Sure, it's big enough, but look at the 
-location. (laughs...then the laugh turns 
-into a groan)
+Eu não ligo... para o que todo mundo gosta. 
+Ogros não são como bolos.
 
-DONKEY
-Uh, Shrek? Uh, remember when you said 
-ogres have layers?
-
-SHREK
-Oh, aye.
-
-DONKEY
-Well, I have a bit of a confession to 
-make. Donkeys don't have layers. We 
-wear our fear right out there on our 
-sleeves.
+BURRO
+Sabe do que mais todo mundo gosta? 
+Pavê. Você já conheceu uma pessoa, 
+você diz: "Vamos comer pavê", ela 
+diz: "Diabo não, eu não gosto de pavê"? 
+Pavês são deliciosos.
 
 SHREK
-Wait a second. Donkeys don't have sleeves.
+Não! Sua besta de carga densa, irritante e em miniatura! 
+Ogros são como cebolas! 
+Fim de papo. Tchau-tchau. Até mais.
 
-
-DONKEY
-You know what I mean.
-
-SHREK
-You can't tell me you're afraid of heights.
-
-
-DONKEY
-No, I'm just a little uncomfortable 
-about being on a rickety bridge over 
-a boiling like of lava!
+BURRO
+Pavês podem ser a coisa mais deliciosa 
+de todo o maldito planeta.
 
 SHREK
-Come on, Donkey. I'm right here beside 
-ya, okay? For emotional support., we'll 
-just tackle this thing together one 
-little baby step at a time.
+Sabe, acho que preferia quando você cantarolava.
 
-DONKEY
-Really?
+BURRO
+Você tem um lenço ou algo assim? Estou 
+fazendo uma bagunça. Só a palavra pavê 
+me faz babar.
 
-SHREK
-Really, really.
+Eles partem. Há uma montagem de sua jornada. Caminhando por 
+um campo ao pôr do sol. Dormindo sob uma lua brilhante. Shrek tentando 
+apagar a fogueira no dia seguinte e tendo um pequeno problema, 
+então Burro faz xixi no fogo para apagá-lo.
 
-DONKEY
-Okay, that makes me feel so much better.
+TORRE DO DRAGÃO
 
+Shrek e Burro estão caminhando até a torre que supostamente 
+abriga a Princesa Fiona. Parece um vulcão gigante.
 
-SHREK
-Just keep moving. And don't look down.
-
-
-DONKEY
-Okay, don't look down. Don't look down. 
-Don't look down. Keep on moving. Don't 
-look down. (he steps through a rotting 
-board and ends up looking straight down 
-into the lava) Shrek! I'm lookin' down! 
-Oh, God, I can't do this! Just let me 
-off, please!
+BURRO
+(cheira) Ohh! Shrek! Foi você que fez isso? 
+Você tem que avisar alguém antes de 
+soltar um. Minha boca estava aberta e 
+tudo mais.
 
 SHREK
-But you're already halfway.
+Acredite em mim, Burro, se fosse eu, você 
+estaria morto. (cheira) É enxofre. Devemos 
+estar chegando perto.
 
-DONKEY
-But I know that half is safe!
+BURRO
+Sim, claro, enxofre. Não venha falar 
+que é enxofre. Eu sei o que 
+eu sinto. Não foi enxofre nenhum. 
+Nem saiu de pedra nenhuma também.
 
-SHREK
-Okay, fine. I don't have time for this. 
-You go back.
-
-DONKEY
-Shrek, no! Wait!
-
-SHREK
-Just, Donkey - - Let's have a dance 
-then, shall me? (bounces and sways the 
-bridge)
-
-DONKEY
-Don't do that!
+Eles sobem pelo lado do vulcão/torre e olham para baixo. Há 
+um pequeno pedaço de rocha bem no centro e é lá que 
+o castelo está. É cercado por lava fervente. Parece muito 
+ameaçador.
 
 SHREK
-Oh, I'm sorry. Do what? Oh, this? (bounces 
-the bridge again)
+Claro, é grande o suficiente, mas olha a 
+localização. (ri... então a risada se transforma 
+em um gemido)
 
-DONKEY
-Yes, that!
-
-SHREK
-Yes? Yes, do it. Okay. (continues to 
-bounce and sway as he backs Donkey across 
-the bridge)
-
-DONKEY
-No, Shrek! No! Stop it!
+BURRO
+Uh, Shrek? Uh, lembra quando você disse 
+que ogros têm camadas?
 
 SHREK
-You said do it! I'm doin' it.
+Ah, sim.
 
-DONKEY
-I'm gonna die. I'm gonna die. Shrek, 
-I'm gonna die. (steps onto solid ground) 
+BURRO
+Bem, eu tenho uma confissão a 
+fazer. Burros não têm camadas. Nós 
+usamos nosso medo bem ali nas nossas 
+mangas.
+
+SHREK
+Espere um segundo. Burros não têm mangas.
+
+BURRO
+Você sabe o que eu quero dizer.
+
+SHREK
+Você não pode me dizer que tem medo de altura.
+
+BURRO
+Não, eu só estou um pouco desconfortável 
+em estar em uma ponte frágil sobre 
+um lago fervente de lava!
+
+SHREK
+Vamos, Burro. Estou bem aqui ao seu lado, 
+ok? Para apoio emocional, vamos 
+apenas enfrentar essa coisa juntos, um 
+passinho de bebê de cada vez.
+
+BURRO
+Sério?
+
+SHREK
+Sério, sério.
+
+BURRO
+Ok, isso me faz sentir muito melhor.
+
+SHREK
+Apenas continue andando. E não olhe para baixo.
+
+BURRO
+Ok, não olhe para baixo. Não olhe para baixo. 
+Não olhe para baixo. Continue andando. Não 
+olhe para baixo. (ele pisa em uma tábua podre 
+e acaba olhando diretamente para baixo 
+para a lava) Shrek! Eu estou olhando para baixo! 
+Oh, Deus, eu não consigo fazer isso! Apenas me deixe 
+sair, por favor!
+
+SHREK
+Mas você já está na metade do caminho.
+
+BURRO
+Mas eu sei que aquela metade é segura!
+
+SHREK
+Ok, tudo bem. Eu não tenho tempo para isso. 
+Você volta.
+
+BURRO
+Shrek, não! Espere!
+
+SHREK
+Apenas, Burro - - Vamos dançar 
+então, que tal? (balança e oscila a 
+ponte)
+
+BURRO
+Não faça isso!
+
+SHREK
+Oh, sinto muito. Fazer o quê? Oh, isso? (balança 
+a ponte novamente)
+
+BURRO
+Sim, isso!
+
+SHREK
+Sim? Sim, fazer isso. Ok. (continua a 
+balançar e oscilar enquanto recua Burro através 
+da ponte)
+
+BURRO
+Não, Shrek! Não! Pare com isso!
+
+SHREK
+Você disse faz! Eu estou fazendo.
+
+BURRO
+Eu vou morrer. Eu vou morrer. Shrek, 
+eu vou morrer. (pisa em terra firme) 
 Oh!
 
 SHREK
-That'll do, Donkey. That'll do. (walks 
-towards the castle)
+Isso serve, Burro. Isso serve. (caminha 
+em direção ao castelo)
 
-DONKEY
-Cool. So where is this fire-breathing 
-pain-in-the-neck anyway?
-
-SHREK
-Inside, waiting for us to rescue her. 
-(chuckles)
-
-DONKEY
-I was talkin' about the dragon, Shrek.
-
-
-INSIDE THE CASTLE
-
-DONKEY
-You afraid?
+BURRO
+Legal. Então onde está esse bafo de fogo 
+pé no saco afinal?
 
 SHREK
-No.
+Lá dentro, esperando que a gente a resgate. 
+(ri)
 
-DONKEY
-But...
+BURRO
+Eu estava falando do dragão, Shrek.
+
+DENTRO DO CASTELO
+
+BURRO
+Você está com medo?
+
+SHREK
+Não.
+
+BURRO
+Mas...
 
 SHREK
 Shh.
 
-DONKEY
-Oh, good. Me neither. (sees a skeleton 
-and gasps) 'Cause there's nothin' wrong 
-with bein' afraid. Fear's a sensible 
-response to an unfamiliar situation. 
-Unfamiliar dangerous situation, I might 
-add. With a dragon that breathes fire 
-and eats knights and breathes fire, 
-it sure doesn't mean you're a coward 
-if you're a little scared. I sure as 
-heck ain't no coward. I know that.
-
-
-SHREK
-Donkey, two things, okay? Shut ... up. 
-Now go over there and see if you can 
-find any stairs.
-
-DONKEY
-Stairs? I thought we was lookin' for 
-the princess.
+BURRO
+Oh, bom. Eu também não. (vê um esqueleto 
+e suspira) Porque não há nada de errado 
+em ter medo. O medo é uma resposta sensata 
+a uma situação desconhecida. 
+Situação perigosa desconhecida, devo 
+acrescentar. Com um dragão que cospe fogo 
+e come cavaleiros e cospe fogo, 
+com certeza não significa que você é um covarde 
+se estiver um pouco assustado. Eu com certeza 
+não sou covarde. Eu sei disso.
 
 SHREK
-(putting on a helmet) The princess will 
-be up the stairs in the highest room 
-in the tallest tower.
+Burro, duas coisas, ok? Cale... a boca. 
+Agora vá lá e veja se consegue 
+encontrar alguma escada.
 
-DONKEY
-What makes you think she'll be there?
-
-
-SHREK
-I read it in a book once. (walks off)
-
-
-DONKEY
-Cool. You handle the dragon. I'll handle 
-the stairs. I'll find those stairs. 
-I'll whip their butt too. Those stairs 
-won't know which way they're goin'. 
-(walks off)
-
-EMPTY ROOM
-
-Donkey is still talking to himself as he looks around the room.
-
-
-DONKEY
-I'm gonna take drastic steps. Kick it 
-to the curb. Don't mess with me. I'm 
-the stair master. I've mastered the 
-stairs. I wish I had a step right here. 
-I'd step all over it.
-
-ELSEWHERE
-
-Shrek spots a light in the tallest tower window.
+BURRO
+Escadas? Eu pensei que estávamos procurando 
+a princesa.
 
 SHREK
-Well, at least we know where the princess 
-is, but where's the...
+(colocando um capacete) A princesa estará 
+no topo das escadas no quarto mais alto 
+da torre mais alta.
 
-DONKEY
-(os) Dragon!
-
-Donkey gasps and takes off running as the dragon roars again. 
-Shrek manages to grab Donkey out of the way just as the dragon 
-breathes fire.
+BURRO
+O que te faz pensar que ela estará lá?
 
 SHREK
-Donkey, look out! (he manages to get 
-a hold of the dragons tail and holds 
-on) Got ya!
+Eu li em um livro uma vez. (vai embora)
 
-The dragon gets irritated at this and flicks it's tail and Shrek 
-goes flying through the air and crashes through the roof of the 
-tallest tower. Fiona wakes up with a jerk and looks at him lying 
-on the floor.
+BURRO
+Legal. Você cuida do dragão. Eu cuido 
+das escadas. Eu vou encontrar essas escadas. 
+Vou chutar a bunda delas também. Essas escadas 
+não vão saber para onde estão indo. 
+(vai embora)
 
-DONKEY
+SALA VAZIA
+
+Burro ainda está falando sozinho enquanto olha ao redor da sala.
+
+BURRO
+Vou tomar medidas drásticas. Chutar 
+para o meio-fio. Não mexa comigo. Eu sou 
+o mestre das escadas. Eu dominei as 
+escadas. Eu gostaria de ter um degrau aqui. 
+Eu pisaria nele todo.
+
+EM OUTRO LUGAR
+
+Shrek vê uma luz na janela da torre mais alta.
+
+SHREK
+Bem, pelo menos sabemos onde a princesa 
+está, mas onde está o...
+
+BURRO
+(fora de cena) Dragão!
+
+Burro suspira e sai correndo enquanto o dragão ruge novamente. 
+Shrek consegue agarrar o Burro do caminho logo quando o dragão 
+cospe fogo.
+
+SHREK
+Burro, cuidado! (ele consegue 
+segurar o rabo do dragão e se segura) 
+Peguei você!
+
+O dragão fica irritado com isso e agita o rabo e Shrek 
+sai voando pelo ar e atravessa o telhado da 
+torre mais alta. Fiona acorda com um solavanco e olha para ele deitado 
+no chão.
+
+BURRO
 Oh! Aah! Aah!
 
-Donkey get cornered as the Dragon knocks away all but a small 
-part of the bridge he's on.
+Burro fica encurralado quando o Dragão derruba tudo, exceto uma pequena 
+parte da ponte em que ele está.
 
-DONKEY
-No. Oh, no, No! (the dragon roars) Oh, 
-what large teeth you have. (the dragon 
-growls) I mean white, sparkling teeth. 
-I know you probably hear this all time 
-from your food, but you must bleach, 
-'cause that is one dazzling smile you 
-got there. Do I detect a hint of minty 
-freshness? And you know what else? You're 
-- - You're a girl dragon! Oh, sure! 
-I mean, of course you're a girl dragon. 
-You're just reeking of feminine beauty. 
-(the dragon begins fluttering her eyes 
-at him) What's the matter with you? 
-You got something in your eye? Ohh. 
-Oh. Oh. Man, I'd really love to stay, 
-but you know, I'm, uh...(the dragon 
-blows a smoke ring in the shape of a 
-heart right at him, and he coughs) I'm 
-an asthmatic, and I don't know if it'd 
-work out if you're gonna blow smoke 
-rings. Shrek! (the dragon picks him 
-up with her teeth and carries him off) 
-No! Shrek! Shrek! Shrek!
+BURRO
+Não. Oh, não, Não! (o dragão ruge) Oh, 
+que dentes grandes você tem. (o dragão 
+rosna) Quero dizer, dentes brancos e brilhantes. 
+Eu sei que você provavelmente ouve isso o tempo todo 
+da sua comida, mas você deve fazer clareamento, 
+porque esse é um sorriso deslumbrante que você 
+tem aí. Eu detecto um toque de frescor mentolado? 
+E sabe o que mais? Você é 
+- - Você é uma dragão fêmea! Oh, claro! 
+Quero dizer, é claro que você é uma dragão fêmea. 
+Você está exalando beleza feminina. 
+(o dragão começa a piscar os olhos para 
+ele) Qual é o problema com você? 
+Caiu alguma coisa no seu olho? Ohh. 
+Oh. Oh. Cara, eu adoraria ficar, 
+mas sabe, eu sou, uh...(o dragão 
+sopra um anel de fumaça em forma de 
+coração direto para ele, e ele tosse) Eu sou 
+asmático, e não sei se daria 
+certo se você vai soprar anéis de fumaça. 
+Shrek! (o dragão o pega 
+com os dentes e o carrega) 
+Não! Shrek! Shrek! Shrek!
 
-FIONA'S ROOM
+QUARTO DA FIONA
 
-Shrek groans as he gets up off the floor. His back is to Fiona 
-so she straightens her dress and lays back down on the bed. She 
-then quickly reaches over and gets the bouquet of flowers off 
-the side table. She then lays back down and appears to be asleep. 
-Shrek turns and goes over to her. He looks down at Fiona for 
-a moment and she puckers her lips. Shrek takes her by the shoulders 
-and shakes her away.
+Shrek geme enquanto se levanta do chão. Ele está de costas para Fiona 
+então ela ajeita o vestido e se deita de volta na cama. Ela 
+então rapidamente se estica e pega o buquê de flores da 
+mesa lateral. Ela então se deita de volta e parece estar dormindo. 
+Shrek se vira e vai até ela. Ele olha para Fiona por 
+um momento e ela faz bico. Shrek a pega pelos ombros 
+e a sacode.
 
 FIONA
 Oh! Oh!
 
 SHREK
-Wake up!
+Acorde!
 
 FIONA
-What?
+O quê?
 
 SHREK
-Are you Princess Fiona?
+Você é a Princesa Fiona?
 
 FIONA
-I am, awaiting a knight so bold as to 
-rescue me.
+Eu sou, aguardando um cavaleiro tão ousado para 
+me resgatar.
 
 SHREK
-Oh, that's nice. Now let's go!
+Oh, que legal. Agora vamos!
 
 FIONA
-But wait, Sir Knight. This be-ith our 
-first meeting. Should it not be a wonderful, 
-romantic moment?
+Mas espere, Senhor Cavaleiro. Este é o nosso 
+primeiro encontro. Não deveria ser um momento maravilhoso 
+e romântico?
 
 SHREK
-Yeah, sorry, lady. There's no time.
-
+Sim, desculpe, senhora. Não há tempo.
 
 FIONA
-Hey, wait. What are you doing? You should 
-sweep me off my feet out yonder window 
-and down a rope onto your valiant steed.
-
+Ei, espere. O que você está fazendo? Você deveria 
+me carregar nos braços por aquela janela 
+e descer uma corda até seu valente corcel.
 
 SHREK
-You've had a lot of time to plan this, 
-haven't you?
+Você teve muito tempo para planejar isso, 
+não teve?
 
 FIONA
-(smiles) Mm-hmm.
+(sorri) Mm-hmm.
 
-Shrek breaks the lock on her door and pulls her out and down 
-the hallway.
+Shrek quebra a fechadura da porta dela e a puxa para fora e pelo 
+corredor.
 
 FIONA
-But we have to savor this moment! You 
-could recite an epic poem for me. A 
-ballad? A sonnet! A limerick? Or something!
-
+Mas temos que saborear este momento! Você 
+poderia recitar um poema épico para mim. Uma 
+balada? Um soneto! Um limerique? Ou algo assim!
 
 SHREK
-I don't think so.
+Acho que não.
 
 FIONA
-Can I at least know the name of my champion?
-
+Posso pelo menos saber o nome do meu campeão?
 
 SHREK
 Uh, Shrek.
 
 FIONA
-Sir Shrek. (clears throat and holds 
-out a handkerchief) I pray that you 
-take this favor as a token of my gratitude.
-
+Sir Shrek. (limpa a garganta e estende 
+um lenço) Peço que você 
+aceite este favor como um sinal da minha gratidão.
 
 SHREK
-Thanks!
+Valeu!
 
-Suddenly they hear the dragon roar.
+De repente eles ouvem o dragão rugir.
 
 FIONA
-(surprised)You didn't slay the dragon?
-
+(surpresa) Você não matou o dragão?
 
 SHREK
-It's on my to-do list. Now come on! 
-(takes off running and drags Fiona behind 
-him.)
+Está na minha lista de tarefas. Agora vamos! 
+(sai correndo e arrasta Fiona atrás 
+dele.)
 
 FIONA
-But this isn't right! You were meant 
-to charge in, sword drawn, banner flying. 
-That's what all the other knights did.
-
+Mas isso não está certo! Você deveria 
+entrar com a espada em punho, estandarte voando. 
+Foi o que todos os outros cavaleiros fizeram.
 
 SHREK
-Yeah, right before they burst into flame.
-
+Sim, logo antes de pegarem fogo.
 
 FIONA
-That's not the point. (Shrek suddenly 
-stops and she runs into him.) Oh! (Shrek 
-ignores her and heads for a wooden door 
-off to the side.) Wait. Where are you 
-going? The exit's over there.
+Não é esse o ponto. (Shrek de repente 
+para e ela esbarra nele.) Oh! (Shrek 
+a ignora e vai para uma porta de madeira 
+ao lado.) Espere. Onde você está 
+indo? A saída é por ali.
 
 SHREK
-Well, I have to save my ass.
+Bem, eu tenho que salvar minha pele.
 
 FIONA
-What kind of knight are you?
+Que tipo de cavaleiro é você?
 
 SHREK
-One of a kind. (opens the door into 
-the throne room)
+Único. (abre a porta para 
+a sala do trono)
 
-DONKEY
-(os) Slow down. Slow down, baby, please. 
-I believe it's healthy to get to know 
-someone over a long period of time. 
-Just call me old-fashioned. (laughs 
-worriedly) (we see him up close and 
-from a distance as Shrek sneaks into 
-the room) I don't want to rush into 
-a physical relationship. I'm not emotionally 
-ready for a commitment of, uh, this 
-- - Magnitude really is the word I'm 
-looking for. Magnitude- - Hey, that 
-is unwanted physical contact. Hey, what 
-are you doing? Okay, okay. Let's just 
-back up a little and take this one step 
-at a time. We really should get to know 
-each other first as friends or pen pals. 
-I'm on the road a lot, but I just love 
-receiving cards - - I'd really love 
-to stay, but - - Don't do that! That's 
-my tail! That's my personal tail. You're 
-gonna tear it off. I don't give permission 
-- - What are you gonna do with that? 
-Hey, now. No way. No! No! No, no! No. 
-No, no, no. No! Oh!
+BURRO
+(fora de cena) Devagar. Devagar, gata, por favor. 
+Eu acredito que é saudável conhecer 
+alguém por um longo período de tempo. 
+Me chame de antiquado. (ri 
+preocupado) (vemos ele de perto e 
+de longe enquanto Shrek entra furtivamente na 
+sala) Eu não quero me apressar em 
+um relacionamento físico. Não estou emocionalmente 
+pronto para um compromisso de, uh, essa 
+- - Magnitude é realmente a palavra que estou 
+procurando. Magnitude - - Ei, isso 
+é contato físico indesejado. Ei, o que 
+você está fazendo? Ok, ok. Vamos apenas 
+recuar um pouco e dar um passo 
+de cada vez. Nós realmente deveríamos nos conhecer 
+primeiro como amigos ou correspondentes. 
+Eu estou muito na estrada, mas eu adoro 
+receber cartões - - Eu adoraria 
+ficar, mas - - Não faça isso! Esse é 
+meu rabo! Esse é meu rabo pessoal. Você vai 
+arrancá-lo. Eu não dei permissão 
+- - O que você vai fazer com isso? 
+Ei, agora. De jeito nenhum. Não! Não! Não, não! Não. 
+Não, não, não. Não! Oh!
 
-Shrek grabs a chain that's connected to the chandelier and swings 
-toward the dragon. He misses and he swings back again. He looks 
-up and spots that the chandelier is right above the dragons head. 
-He pulls on the chain and it releases and he falls down and bumps 
-Donkey out of the way right as the dragon is about to kiss him. 
-Instead the dragon kisses Shreks' butt. She opens her eyes and 
-roars. Shrek lets go of the chain and the chandelier falls onto 
-her head, but it's too big and it goes over her head and forms 
-a sort of collar for her. She roars again and Shrek and Donkey 
-take off running. Very 'Matrix' style. Shrek grabs Donkey and 
-then grabs Princess Fiona as he runs past her.
+Shrek agarra uma corrente que está conectada ao lustre e balança 
+em direção ao dragão. Ele erra e balança de volta novamente. Ele olha 
+para cima e vê que o lustre está logo acima da cabeça do dragão. 
+Ele puxa a corrente e ela se solta e ele cai e empurra 
+Burro para fora do caminho bem quando o dragão está prestes a beijá-lo. 
+Em vez disso, o dragão beija a bunda do Shrek. Ela abre os olhos e 
+ruge. Shrek solta a corrente e o lustre cai na 
+cabeça dela, mas é muito grande e passa por cima da cabeça dela e forma 
+uma espécie de coleira para ela. Ela ruge novamente e Shrek e Burro 
+saem correndo. Muito estilo 'Matrix'. Shrek agarra Burro e 
+então agarra a Princesa Fiona enquanto corre por ela.
 
-DONKEY
-Hi, Princess!
+BURRO
+Oi, Princesa!
 
 FIONA
-It talks!
+Ele fala!
 
 SHREK
-Yeah, it's getting him to shut up that's 
-the trick.
+Sim, fazer ele calar a boca que é 
+o truque.
 
-They all start screaming as the dragon gains on them. Shrek spots 
-a descending slide and jumps on. But unfortunately there is a 
-crack in the stone and it hits Shrek right in the groin. His 
-eyes cross and as he reaches the bottom of the slide he stumbles 
-off and walks lightly.
+Todos começam a gritar enquanto o dragão ganha terreno. Shrek vê 
+um escorregador descendente e pula nele. Mas infelizmente há uma 
+rachadura na pedra e ela atinge Shrek bem na virilha. Seus 
+olhos se cruzam e quando ele chega ao fundo do escorregador ele tropeça 
+e caminha com dificuldade.
 
 SHREK
 Oh!
 
-Shrek gets them close to the exit and sets down Donkey and Fiona.
-
-
-SHREK
-Okay, you two, heard for the exit! I'll 
-take care of the dragon.
-
-Shrek grabs a sword and heads back toward the interior of the 
-castle. He throws the sword down in between several overlapping 
-chain links. The chain links are attached to the chandelier that 
-is still around the dragons neck.
+Shrek os aproxima da saída e coloca Burro e Fiona no chão.
 
 SHREK
-(echoing) Run!
+Ok, vocês dois, vão para a saída! Eu vou 
+cuidar do dragão.
 
-They all take off running for the exit with the dragon in hot 
-pursuit. They make it to the bridge and head across. The dragons 
-breathes fire and the bridge begins to burn. They all hang on 
-for dear life as the ropes holding the bridge up collapse. They 
-are swung to the other side. As they hang upside down they look 
-in horror as the dragon makes to fly over the boiling lava to 
-get them. But suddenly the chandelier with the chain jerk the 
-dragon back and she's unable to get to them. Our gang climbs 
-quickly to safety as the dragon looks angry and then gives a 
-sad whimper as she watches Donkey walk away.
+Shrek pega uma espada e volta para o interior do 
+castelo. Ele joga a espada entre vários elos de corrente sobrepostos. 
+Os elos da corrente estão presos ao lustre que 
+ainda está em volta do pescoço do dragão.
+
+SHREK
+(ecoando) Corram!
+
+Todos saem correndo para a saída com o dragão em perseguição. 
+Eles chegam à ponte e atravessam. O dragão 
+cospe fogo e a ponte começa a queimar. Todos se seguram 
+pela vida enquanto as cordas que seguram a ponte colapsam. Eles 
+são balançados para o outro lado. Enquanto ficam pendurados de cabeça para baixo eles olham 
+horrorizados enquanto o dragão tenta voar sobre a lava fervente para 
+pegá-los. Mas de repente o lustre com a corrente puxa o 
+dragão para trás e ela não consegue alcançá-los. Nossa turma sobe 
+rapidamente para a segurança enquanto o dragão parece bravo e depois dá um 
+gemido triste enquanto vê Burro se afastar.
 
 FIONA
-(sliding down the 'volcano' hill) You 
-did it! You rescued me! You're amazing. 
-(behind her Donkey falls down the hill) 
-You're - - You're wonderful. You're... 
-(turns and sees Shrek fall down the 
-hill and bump into Donkey) a little 
-unorthodox I'll admit. But thy deed 
-is great, and thy heart is pure. I am 
-eternally in your debt. (Donkey clears 
-his throat.) And where would a brave 
-knight be without his noble steed?
+(deslizando colina do 'vulcão' abaixo) Você 
+conseguiu! Você me resgatou! Você é incrível. 
+(atrás dela Burro cai colina abaixo) 
+Você é - - Você é maravilhoso. Você é... 
+(se vira e vê Shrek cair colina abaixo 
+e esbarrar no Burro) um pouco 
+pouco ortodoxo, admito. Mas teu feito 
+é grande, e teu coração é puro. Sou 
+eternamente grata. (Burro limpa 
+a garganta.) E onde estaria um bravo 
+cavaleiro sem seu nobre corcel?
 
-
-DONKEY
-I hope you heard that. She called me 
-a noble steed. She think I'm a steed.
-
+BURRO
+Espero que tenha ouvido isso. Ela me chamou 
+de nobre corcel. Ela acha que sou um corcel.
 
 FIONA
-The battle is won. You may remove your 
-helmet, good Sir Knight.
+A batalha foi vencida. Pode remover seu 
+capacete, bom Senhor Cavaleiro.
 
 SHREK
-Uh, no.
+Uh, não.
 
 FIONA
-Why not?
+Por que não?
 
 SHREK
-I have helmet hair.
+Estou com o cabelo bagunçado pelo capacete.
 
 FIONA
-Please. I would'st look upon the face 
-of my rescuer.
+Por favor. Eu gostaria de ver o rosto 
+do meu salvador.
 
 SHREK
-No, no, you wouldn't - - 'st.
+Não, não, você não gostaria - - 'ria.
 
 FIONA
-But how will you kiss me?
+Mas como você vai me beijar?
 
 SHREK
-What? (to Donkey) That wasn't in the 
-job description.
+O quê? (para Burro) Isso não estava na 
+descrição do trabalho.
 
-DONKEY
-Maybe it's a perk.
+BURRO
+Talvez seja um bônus.
 
 FIONA
-No, it's destiny. Oh, you must know 
-how it goes. A princess locked in a 
-tower and beset by a dragon is rescued 
-by a brave knight, and then they share 
-true love's first kiss.
+Não, é o destino. Oh, você deve saber 
+como funciona. Uma princesa trancada em uma 
+torre e cercada por um dragão é resgatada 
+por um bravo cavaleiro, e então eles compartilham 
+o primeiro beijo do amor verdadeiro.
 
-DONKEY
-Hmm? With Shrek? You think- - Wait. 
-Wait. You think that Shrek is you true 
-love?
-
-FIONA
-Well, yes.
-
-Both Donkey and Shrek burst out laughing.
-
-DONKEY
-You think Shrek is your true love!
-
+BURRO
+Hmm? Com o Shrek? Você acha- - Espere. 
+Espere. Você acha que o Shrek é seu verdadeiro 
+amor?
 
 FIONA
-What is so funny?
+Bem, sim.
 
-SHREK
-Let's just say I'm not your type, okay?Fiona: 
-Of course, you are. You're my rescuer. 
-Now - - Now remove your helmet.
+Tanto Burro quanto Shrek caem na gargalhada.
 
-SHREK
-Look. I really don't think this is a 
-good idea.
+BURRO
+Você acha que Shrek é seu verdadeiro amor!
 
 FIONA
-Just take off the helmet.
+O que é tão engraçado?
 
 SHREK
-I'm not going to.
+Vamos apenas dizer que não sou seu tipo, ok?
 
 FIONA
-Take it off.
+Claro que é. Você é meu salvador. 
+Agora - - Agora remova seu capacete.
 
 SHREK
-No!
+Olha. Eu realmente não acho que isso seja uma 
+boa ideia.
 
 FIONA
-Now!
+Apenas tire o capacete.
 
 SHREK
-Okay! Easy. As you command. Your Highness. 
-(takes off his helmet)
+Eu não vou tirar.
 
 FIONA
-You- - You're a- - an ogre.
+Tire.
 
 SHREK
-Oh, you were expecting Prince Charming.
-
+Não!
 
 FIONA
-Well, yes, actually. Oh, no. This is 
-all wrong. You're not supposed to be 
-an ogre.
+Agora!
 
 SHREK
-Princess, I was sent to rescue you by 
-Lord Farquaad, okay? He is the one who 
-wants to marry you.
+Ok! Calma. Como desejar. Vossa Alteza. 
+(tira o capacete)
 
 FIONA
-Then why didn't he come rescue me?
-
+Você- - Você é um- - um ogro.
 
 SHREK
-Good question. You should ask him that 
-when we get there.
+Oh, você estava esperando o Príncipe Encantado.
 
 FIONA
-But I have to be rescued by my true 
-love, not by some ogre and his- - his 
-pet.
-
-DONKEY
-Well, so much for noble steed.
+Bem, sim, na verdade. Oh, não. Isso está 
+tudo errado. Você não deveria ser 
+um ogro.
 
 SHREK
-You're not making my job any easier.
-
+Princesa, fui enviado para resgatá-la por 
+Lorde Farquaad, ok? Ele é quem 
+quer se casar com você.
 
 FIONA
-I'm sorry, but your job is not my problem. 
-You can tell Lord Farquaad that if he 
-wants to rescue me properly, I'll be 
-waiting for him right here.
+Então por que ele não veio me resgatar?
 
 SHREK
-Hey! I'm no one's messenger boy, all 
-right? (ominous) I'm a delivery boy. 
-(he swiftly picks her up and swings 
-her over his shoulder like she was a 
-sack of potatoes)
+Boa pergunta. Você deveria perguntar isso a ele 
+quando chegarmos lá.
 
 FIONA
-You wouldn't dare. Put me down!
+Mas eu tenho que ser resgatada pelo meu verdadeiro 
+amor, não por algum ogro e seu- - seu 
+animal de estimação.
+
+BURRO
+Bem, já era o nobre corcel.
 
 SHREK
-Ya comin', Donkey?
-
-DONKEY
-I'm right behind ya.
+Você não está facilitando meu trabalho.
 
 FIONA
-Put me down, or you will suffer the 
-consequences! This is not dignified! 
-Put me down!
+Sinto muito, mas seu trabalho não é problema meu. 
+Você pode dizer a Lorde Farquaad que se ele 
+quiser me resgatar adequadamente, estarei 
+esperando por ele bem aqui.
 
-WOODS
-
-A little time has passed and Fiona has calmed down. She just 
-hangs there limply while Shrek carries her.
-
-DONKEY
-Okay, so here's another question. Say 
-there's a woman that digs you, right, 
-but you don't really like her that way. 
-How do you let her down real easy so 
-her feelings aren't hurt, but you don't 
-get burned to a crisp and eaten?
+SHREK
+Ei! Eu não sou mensageiro de ninguém, tá 
+legal? (ameaçador) Eu sou um entregador. 
+(ele rapidamente a pega e a joga 
+sobre o ombro como se ela fosse um 
+saco de batatas)
 
 FIONA
-You just tell her she's not your true 
-love. Everyone knows what happens when 
-you find your...(Shrek drops her on 
-the ground) Hey! The sooner we get to 
-DuLoc the better.
+Você não ousaria. Me coloque no chão!
 
-DONKEY
-You're gonna love it there, Princess. 
-It's beautiful!
+SHREK
+Vem vindo, Burro?
+
+BURRO
+Estou logo atrás de você.
 
 FIONA
-And what of my groom-to-be? Lord Farquaad? 
-What's he like?
+Me coloque no chão, ou você sofrerá as 
+consequências! Isso não é digno! 
+Me coloque no chão!
 
-SHREK
-Let me put it this way, Princess. Men 
-of Farquaad's stature are in short supply. 
-(he and Donkey laugh)
+BOSQUE
 
-Shrek then proceeds to splash water onto his face to wash off 
-the dust and grime.
+Passou um tempinho e Fiona se acalmou. Ela apenas 
+fica pendurada inerte enquanto Shrek a carrega.
 
-DONKEY
-I don't know. There are those who think 
-little of him. (they laugh again) Fiona: 
-Stop it. Stop it, both of you. You're 
-just jealous you can never measure up 
-to a great ruler like Lord Farquaad.
-
-
-SHREK
-Yeah, well, maybe you're right, Princess. 
-But I'll let you do the "measuring" 
-when you see him tomorrow.
+BURRO
+Ok, então aqui vai outra pergunta. Digamos 
+que tem uma mulher que gosta de você, certo, 
+mas você realmente não gosta dela desse jeito. 
+Como você dá um fora nela bem devagar para que 
+os sentimentos dela não sejam feridos, mas você não 
+seja queimado até virar uma batata frita e comido?
 
 FIONA
-(looks at the setting sun) Tomorrow? 
-It'll take that long? Shouldn't we stop 
-to make camp?
+Você apenas diz a ela que ela não é seu verdadeiro 
+amor. Todo mundo sabe o que acontece quando 
+você encontra seu...(Shrek a derruba no 
+chão) Ei! Quanto antes chegarmos a 
+Duloc, melhor.
 
-SHREK
-No, that'll take longer. We can keep 
-going.
-
-FIONA
-But there's robbers in the woods.
-
-DONKEY
-Whoa! Time out, Shrek! Camp is starting 
-to sound good.
-
-SHREK
-Hey, come on. I'm scarier than anything 
-we're going to see in this forest.
-
+BURRO
+Você vai adorar lá, Princesa. 
+É lindo!
 
 FIONA
-I need to find somewhere to camp now!
-
-
-Both Donkey and Shrek's ears lower as they shrink away from her.
-
-
-MOUNTAIN CLIFF
-
-Shrek has found a cave that appears to be in good order. He shoves 
-a stone boulder out of the way to reveal the cave.
+E quanto ao meu noivo? Lorde Farquaad? 
+Como ele é?
 
 SHREK
-Hey! Over here.
+Deixe-me colocar desta forma, Princesa. Homens 
+da estatura de Farquaad estão em falta. 
+(ele e Burro riem)
 
-DONKEY
-Shrek, we can do better than that. I 
-don't think this is fit for a princess.
+Shrek então começa a jogar água no rosto para lavar 
+a poeira e a sujeira.
 
+BURRO
+Eu não sei. Há quem pense 
+pouco dele. (eles riem novamente)
 
 FIONA
-No, no, it's perfect. It just needs 
-a few homey touches.
+Parem com isso. Parem com isso, vocês dois. Vocês 
+estão apenas com ciúmes porque nunca poderão se comparar 
+a um grande governante como Lorde Farquaad.
 
 SHREK
-Homey touches? Like what? (he hears 
-a tearing noise and looks over at Fiona 
-who has torn the bark off of a tree.)
-
+É, bem, talvez você esteja certa, Princesa. 
+Mas deixarei você fazer a "medição" 
+quando o vir amanhã.
 
 FIONA
-A door? Well, gentlemen, I bid thee 
-good night. (goes into the cave and 
-puts the bark door up behind her)
+(olha para o pôr do sol) Amanhã? 
+Vai demorar tanto assim? Não deveríamos parar 
+para acampar?
 
-
-DONKEY
-You want me to read you a bedtime story? 
-I will.
+SHREK
+Não, isso vai demorar mais. Podemos continuar 
+andando.
 
 FIONA
-(os) I said good night!
+Mas há ladrões na floresta.
 
-Shrek looks at Donkey for a second and then goes to move the 
-boulder back in front of the entrance to the cave with Fiona 
-still inside.
-
-DONKEY
-Shrek, What are you doing?
+BURRO
+Opa! Tempo, Shrek! Acampar está começando 
+a soar bem.
 
 SHREK
-(laughs) I just- - You know - - Oh, 
-come on. I was just kidding.
+Ei, vamos lá. Eu sou mais assustador do que qualquer coisa 
+que vamos ver nesta floresta.
 
-LATER THAT NIGHT
+FIONA
+Eu preciso encontrar um lugar para acampar agora!
 
-Shrek and Donkey are sitting around a campfire. They are staring 
-up into the sky as Shrek points out certain star constellations 
-to Donkey.
+As orelhas de Burro e Shrek baixam enquanto eles recuam dela.
 
-SHREK
-And, uh, that one, that's Throwback, 
-the only ogre to ever spit over three 
-wheat fields.
+PENHASCO DA MONTANHA
 
-DONKEY
-Right. Yeah. Hey, can you tell my future 
-from these stars?
+Shrek encontrou uma caverna que parece estar em boa ordem. Ele empurra 
+uma pedra para fora do caminho para revelar a caverna.
 
 SHREK
-The stars don't tell the future, Donkey. 
-They tell stories. Look, there's Bloodnut, 
-the Flatulent. You can guess what he's 
-famous for.
+Ei! Por aqui.
 
-DONKEY
-I know you're making this up.
+BURRO
+Shrek, podemos fazer melhor que isso. Eu 
+não acho que isso seja adequado para uma princesa.
 
-SHREK
-No, look. There he is, and there's the 
-group of hunters running away from his 
-stench.
-
-DONKEY
-That ain't nothin' but a bunch of little 
-dots.
+FIONA
+Não, não, é perfeito. Só precisa de 
+alguns toques caseiros.
 
 SHREK
-You know, Donkey, sometimes things are 
-more than they appear. Hmm? Forget it.
+Toques caseiros? Tipo o quê? (ele ouve 
+um barulho de rasgo e olha para Fiona 
+que arrancou a casca de uma árvore.)
 
+FIONA
+Uma porta? Bem, senhores, eu lhes desejo 
+boa noite. (entra na caverna e 
+coloca a porta de casca atrás dela)
 
-DONKEY
-(heaves a big sigh) Hey, Shrek, what 
-we gonna do when we get our swamp anyway?
+BURRO
+Você quer que eu leia uma história de ninar? 
+Eu leio.
 
+FIONA
+(fora de cena) Eu disse boa noite!
 
-SHREK
-Our swamp?
+Shrek olha para Burro por um segundo e depois vai mover a 
+pedra de volta para a frente da entrada da caverna com Fiona 
+ainda dentro.
 
-DONKEY
-You know, when we're through rescuing 
-the princess.
-
-SHREK
-We? Donkey, there's no "we". There's 
-no "our". There's just me and my swamp. 
-The first thing I'm gonna do is build 
-a ten-foot wall around my land.
-
-DONKEY
-You cut me deep, Shrek. You cut me real 
-deep just now. You know what I think? 
-I think this whole wall thing is just 
-a way to keep somebody out.
+BURRO
+Shrek, o que você está fazendo?
 
 SHREK
-No, do ya think?
+(ri) Eu só- - Sabe - - Ah, 
+qual é. Eu estava só brincando.
 
-DONKEY
-Are you hidin' something?
+MAIS TARDE NAQUELA NOITE
 
-SHREK
-Never mind, Donkey.
-
-DONKEY
-Oh, this is another one of those onion 
-things, isn't it?
+Shrek e Burro estão sentados ao redor de uma fogueira. Eles estão olhando 
+para o céu enquanto Shrek aponta certas constelações 
+para o Burro.
 
 SHREK
-No, this is one of those drop-it and 
-leave-it alone things.
+E, uh, aquele, aquele é Throwback, 
+o único ogro que já cuspiu sobre três 
+campos de trigo.
 
-DONKEY
-Why don't you want to talk about it?
-
-
-SHREK
-Why do you want to talk about it?
-
-DONKEY
-Why are you blocking?
+BURRO
+Certo. Sim. Ei, você pode prever meu futuro 
+com essas estrelas?
 
 SHREK
-I'm not blocking.
+As estrelas não preveem o futuro, Burro. 
+Elas contam histórias. Olha, lá está Bloodnut, 
+o Flatulento. Você pode adivinhar pelo que ele é 
+famoso.
 
-DONKEY
-Oh, yes, you are.
-
-SHREK
-Donkey, I'm warning you.
-
-DONKEY
-Who you trying to keep out?
+BURRO
+Eu sei que você está inventando isso.
 
 SHREK
-Everyone! Okay?
+Não, olha. Lá está ele, e lá está o 
+grupo de caçadores fugindo do fedor dele.
 
-DONKEY
-(pause) Oh, now we're gettin' somewhere. 
-(grins)
-
-At this point Fiona pulls the 'door' away from the entrance to 
-the cave and peaks out. Neither of the guys see her.
+BURRO
+Isso não é nada além de um monte de pontinhos.
 
 SHREK
-Oh! For the love of Pete! (gets up and 
-walks over to the edge of the cliff 
-and sits down)
+Sabe, Burro, às vezes as coisas são 
+mais do que parecem. Hmm? Esquece.
 
-DONKEY
-What's your problem? What you got against 
-the whole world anyway?
-
-SHREK
-Look, I'm not the one with the problem, 
-okay? It's the world that seems to have 
-a problem with me. People take one look 
-at me and go. "Aah! Help! Run! A big, 
-stupid, ugly ogre!" They judge me before 
-they even know me. That's why I'm better 
-off alone.
-
-DONKEY
-You know what? When we met, I didn't 
-think you was just a big, stupid, ugly 
-ogre.
+BURRO
+(dá um grande suspiro) Ei, Shrek, o que 
+vamos fazer quando pegarmos nosso pântano afinal?
 
 SHREK
-Yeah, I know.
+Nosso pântano?
 
-DONKEY
-So, uh, are there any donkeys up there?
-
-
-SHREK
-Well, there's, um, Gabby, the Small 
-and Annoying.
-
-DONKEY
-Okay, okay, I see it now. The big shiny 
-one, right there. That one there?
-
-
-Fiona puts the door back.
+BURRO
+Sabe, quando terminarmos de resgatar 
+a princesa.
 
 SHREK
-That's the moon.
+Nós? Burro, não existe "nós". Não 
+existe "nosso". Só existe eu e meu pântano. 
+A primeira coisa que vou fazer é construir 
+um muro de três metros ao redor da minha terra.
 
-DONKEY
-Oh, okay.
+BURRO
+Você me feriu profundamente, Shrek. Você me feriu muito 
+fundo agora. Sabe o que eu acho? 
+Eu acho que toda essa coisa de muro é apenas 
+uma maneira de manter alguém fora.
 
-DuLoc - Farquaad's Bedroom
+SHREK
+Não, você acha?
 
-The camera pans over a lot of wedding stuff. Soft music plays 
-in the background. Farquaad is in bed, watching as the Magic 
-Mirror shows him Princess Fiona.
+BURRO
+Você está escondendo alguma coisa?
+
+SHREK
+Deixa pra lá, Burro.
+
+BURRO
+Ah, essa é outra daquelas coisas de cebola, 
+não é?
+
+SHREK
+Não, essa é uma daquelas coisas de largar pra lá e 
+deixar quieto.
+
+BURRO
+Por que você não quer falar sobre isso?
+
+SHREK
+Por que você quer falar sobre isso?
+
+BURRO
+Por que você está bloqueando?
+
+SHREK
+Eu não estou bloqueando.
+
+BURRO
+Ah, sim, você está.
+
+SHREK
+Burro, estou te avisando.
+
+BURRO
+Quem você está tentando manter fora?
+
+SHREK
+Todo mundo! Ok?
+
+BURRO
+(pausa) Ah, agora estamos chegando a algum lugar. 
+(sorri)
+
+Neste ponto Fiona afasta a 'porta' da entrada da 
+caverna e espia. Nenhum dos caras a vê.
+
+SHREK
+Oh! Pelo amor de Deus! (levanta e 
+caminha até a beira do penhasco 
+e senta)
+
+BURRO
+Qual é o seu problema? O que você tem contra 
+o mundo inteiro afinal?
+
+SHREK
+Olha, eu não sou quem tem o problema, 
+ok? É o mundo que parece ter 
+um problema comigo. As pessoas olham para 
+mim e fazem. "Aah! Socorro! Corram! Um ogro grande, 
+estúpido e feio!" Elas me julgam antes 
+mesmo de me conhecerem. É por isso que estou melhor 
+sozinho.
+
+BURRO
+Sabe de uma coisa? Quando nos conhecemos, eu não 
+pensei que você fosse apenas um ogro grande, estúpido e feio.
+
+SHREK
+É, eu sei.
+
+BURRO
+Então, uh, tem algum burro lá em cima?
+
+SHREK
+Bem, tem, hum, Gabby, o Pequeno 
+e Irritante.
+
+BURRO
+Ok, ok, eu vejo agora. O grande e brilhante 
+lá, bem ali. Aquele ali?
+
+Fiona coloca a porta de volta.
+
+SHREK
+Aquela é a lua.
+
+BURRO
+Ah, ok.
+
+Duloc - Quarto de Farquaad
+
+A câmera passa por um monte de coisas de casamento. Música suave toca 
+ao fundo. Farquaad está na cama, assistindo enquanto o Espelho 
+Mágico mostra a Princesa Fiona.
 
 FARQUAAD
-Again, show me again. Mirror, mirror, 
-show her to me. Show me the princess.
+De novo, mostre-me de novo. Espelho, espelho, 
+mostre-a para mim. Mostre-me a princesa.
 
-
-MIRROR
+ESPELHO
 Hmph.
 
-The Mirror rewinds and begins to play again from the beginning.
-
+O Espelho rebobina e começa a tocar novamente do começo.
 
 FARQUAAD
-Ah. Perfect.
+Ah. Perfeito.
 
-Farquaad looks down at his bare chest and pulls the sheet up 
-to cover himself as though Fiona could see him as he gazes sheepishly 
-at her image in the mirror.
+Farquaad olha para seu peito nu e puxa o lençol para 
+se cobrir como se Fiona pudesse vê-lo enquanto ele olha timidamente 
+para a imagem dela no espelho.
 
-MORNING
+MANHÃ
 
-Fiona walks out of the cave. She glances at Shrek and Donkey 
-who are still sleeping. She wanders off into the woods and comes 
-across a blue bird. She begins to sing. The bird sings along 
-with her. She hits higher and higher notes and the bird struggles 
-to keep up with her. Suddenly the pressure of the note is too 
-big and the bird explodes. Fiona looks a little sheepish, but 
-she eyes the eggs that the bird left behind. Time lapse, Fiona 
-is now cooking the eggs for breakfast. Shrek and Donkey are still 
-sleeping. Shrek wakes up and looks at Fiona. Donkey's talking 
-in his sleep.
+Fiona sai da caverna. Ela olha para Shrek e Burro 
+que ainda estão dormindo. Ela vagueia pela floresta e encontra 
+um pássaro azul. Ela começa a cantar. O pássaro canta junto 
+com ela. Ela atinge notas cada vez mais altas e o pássaro luta 
+para acompanhá-la. De repente, a pressão da nota é muito 
+grande e o pássaro explode. Fiona parece um pouco envergonhada, mas 
+ela olha os ovos que o pássaro deixou para trás. Lapso de tempo, Fiona 
+agora está cozinhando os ovos para o café da manhã. Shrek e Burro ainda estão 
+dormindo. Shrek acorda e olha para Fiona. Burro está falando 
+enquanto dorme.
 
-DONKEY
-(quietly) Mmm, yeah, you know I like 
-it like that. Come on, baby. I said 
-I like it.
-
-SHREK
-Donkey, wake up. (shakes him)
-
-DONKEY
-Huh? What?
+BURRO
+(baixinho) Mmm, sim, você sabe que eu gosto 
+assim. Vem cá, gata. Eu disse 
+que gosto.
 
 SHREK
-Wake up.
+Burro, acorda. (sacode ele)
 
-DONKEY
-What? (stretches and yawns)
+BURRO
+Hã? O quê?
+
+SHREK
+Acorda.
+
+BURRO
+O quê? (espreguiça e boceja)
 
 FIONA
-Good morning. Hm, how do you like your 
-eggs?
+Bom dia. Hm, como você gosta dos seus 
+ovos?
 
-DONKEY
-Oh, good morning, Princess!
+BURRO
+Oh, bom dia, Princesa!
 
-Fiona gets up and sets the eggs down in front of them.
-
-SHREK
-What's all this about?
-
-FIONA
-You know, we kind of got off to a bad 
-start yesterday. I wanted to make it 
-up to you. I mean, after all, you did 
-rescue me.
+Fiona levanta e coloca os ovos na frente deles.
 
 SHREK
-Uh, thanks.
-
-Donkey sniffs the eggs and licks his lips.
+O que é tudo isso?
 
 FIONA
-Well, eat up. We've got a big day ahead 
-of us. (walks off)
+Sabe, nós começamos com o pé 
+esquerdo ontem. Eu queria compensar 
+vocês. Quero dizer, afinal, vocês me resgataram.
 
-LATER
+SHREK
+Uh, valeu.
 
-They are once again on their way. They are walking through the 
-forest. Shrek belches.
+Burro cheira os ovos e lambe os beiços.
 
-DONKEY
+FIONA
+Bem, comam. Temos um grande dia pela frente. (vai embora)
+
+MAIS TARDE
+
+Eles estão mais uma vez a caminho. Estão caminhando pela 
+floresta. Shrek arrota.
+
+BURRO
 Shrek!
 
 SHREK
-What? It's a compliment. Better out 
-than in, I always say. (laughs)
+O quê? É um elogio. Melhor pra fora 
+do que pra dentro, eu sempre digo. (ri)
 
-DONKEY
-Well, it's no way to behave in front 
-of a princess.
+BURRO
+Bem, não é jeito de se comportar na frente 
+de uma princesa.
 
-Fiona belches
+Fiona arrota.
 
 FIONA
-Thanks.
+Obrigada.
 
-DONKEY
-She's as nasty as you are.
+BURRO
+Ela é tão nojenta quanto você.
 
 SHREK
-(chuckles) You know, you're not exactly 
-what I expected.
+(ri) Sabe, você não é exatamente 
+o que eu esperava.
 
 FIONA
-Well, maybe you shouldn't judge people 
-before you get to know them.
+Bem, talvez você não devesse julgar as pessoas 
+antes de conhecê-las.
 
-She smiles and then continues walking, singing softly. Suddenly 
-from out of nowhere, a man swings down and swoops Fiona up into 
-a tree.
+Ela sorri e continua caminhando, cantando baixinho. De repente, 
+do nada, um homem desce balançando e pega Fiona para cima de 
+uma árvore.
 
 ROBIN HOOD
-La liberte! Hey!
+La liberte! Ei!
 
 SHREK
-Princess!
+Princesa!
 
 FIONA
-(to Robin Hood) What are you doing?
-
+(para Robin Hood) O que você está fazendo?
 
 ROBIN HOOD
-Be still, mon cherie, for I am you savior! 
-And I am rescuing you from this green...(kisses 
-up her arm while Fiona pulls back in 
-disgust)...beast.
+Fique quieta, mon cherie, pois eu sou seu salvador! 
+E estou te resgatando desta besta verde...(beija 
+o braço dela enquanto Fiona recua com 
+nojo)...besta.
 
 SHREK
-Hey! That's my princess! Go find you 
-own!
+Ei! Essa é minha princesa! Vá encontrar a 
+sua!
 
 ROBIN HOOD
-Please, monster! Can't you see I'm a 
-little busy here?
+Por favor, monstro! Não vê que estou um 
+pouco ocupado aqui?
 
 FIONA
-(getting fed up) Look, pal, I don't 
-know who you think you are!
+(ficando farta) Olha, cara, eu não 
+sei quem você pensa que é!
 
 ROBIN HOOD
-Oh! Of course! Oh, how rude. Please 
-let me introduce myself. Oh, Merry Men. 
-(laughs)
+Oh! Claro! Oh, que rude. Por favor, 
+deixe-me me apresentar. Oh, Homens Alegres. 
+(ri)
 
-Suddenly an accordion begins to play and the Merry men pop out 
-from the bushes. They begin to sing Robin's theme song.
+De repente, um acordeão começa a tocar e os Homens Alegres surgem 
+dos arbustos. Eles começam a cantar a música tema de Robin.
 
-MERRY MEN
-Ta, dah, dah, dah, whoo.
-
-ROBIN HOOD
-I steal from the rich and give to the 
-needy.
-
-MERRY MEN
-He takes a wee percentage,
+HOMENS ALEGRES
+Ta, dah, dah, dah, uuh.
 
 ROBIN HOOD
-But I'm not greedy. I rescue pretty 
-damsels, man, I'm good.
+Eu roubo dos ricos e dou aos 
+necessitados.
 
-MERRY MEN
-What a guy, Monsieur Hood.
-
-ROBIN HOOD
-Break it down. I like an honest fight 
-and a saucy little maid...
-
-MERRY MEN
-What he's basically saying is he likes 
-to get...
+HOMENS ALEGRES
+Ele pega uma pequena porcentagem,
 
 ROBIN HOOD
-Paid. So...When an ogre in the bush 
-grabs a lady by the tush. That's bad.
+Mas não sou ganancioso. Eu resgato lindas 
+donzelas, cara, eu sou bom.
 
-
-MERRY MEN
-That's bad.
-
-ROBIN HOOD
-When a beauty's with a beast it makes 
-me awfully mad.
-
-MERRY MEN
-He's mad, he's really, really mad.
-
+HOMENS ALEGRES
+Que cara, Monsieur Hood.
 
 ROBIN HOOD
-I'll take my blade and ram it through 
-your heart, keep your eyes on me, boys 
-'cause I'm about to start...
+Manda ver. Eu gosto de uma luta honesta 
+e uma donzela atrevida...
 
-There is a grunt as Fiona swings down from the tree limb and 
-knocks Robin Hood unconscious.
+HOMENS ALEGRES
+O que ele está basicamente dizendo é que gosta 
+de trans...
+
+ROBIN HOOD
+Receber. Então... Quando um ogro no arbusto 
+agarra uma dama pelo bumbum. Isso é mau.
+
+HOMENS ALEGRES
+Isso é mau.
+
+ROBIN HOOD
+Quando uma bela está com uma fera isso me deixa 
+terrivelmente louco.
+
+HOMENS ALEGRES
+Ele está louco, ele está realmente, realmente louco.
+
+ROBIN HOOD
+Vou pegar minha lâmina e enfiá-la no 
+seu coração, mantenham os olhos em mim, garotos 
+porque estou prestes a começar...
+
+Há um grunhido enquanto Fiona desce do galho da árvore e 
+nocauteia Robin Hood.
 
 FIONA
-Man, that was annoying!
+Cara, isso foi irritante!
 
-Shrek looks at her in admiration.
+Shrek olha para ela com admiração.
 
-MERRY MAN
-Oh, you little- - (shoots an arrow at 
-Fiona but she ducks out of the way)
+HOMEM ALEGRE
+Oh, sua pequena- - (atira uma flecha em 
+Fiona, mas ela se esquiva)
 
+A flecha voa em direção ao Burro, que pula nos braços de Shrek para 
+sair do caminho. A flecha apenas rebate em uma árvore.
 
-The arrow flies toward Donkey who jumps into Shrek's arms to 
-get out of the way. The arrow proceeds to just bounce off a tree.
-
-
-Another fight sequence begins and Fiona gives a karate yell and 
-then proceeds to beat the crap out of the Merry Men. There is 
-a very interesting 'Matrix' moment here when Fiona pauses in 
-mid-air to fix her hair. Finally all of the Merry Men are down, 
-and Fiona begins walking away.
+Outra sequência de luta começa e Fiona dá um grito de caratê e 
+então começa a acabar com a raça dos Homens Alegres. Há 
+um momento 'Matrix' muito interessante aqui quando Fiona pausa no 
+ar para arrumar o cabelo. Finalmente, todos os Homens Alegres estão no chão, 
+e Fiona começa a ir embora.
 
 FIONA
-Uh, shall we?
+Uh, vamos?
 
 SHREK
-Hold the phone. (drops Donkey and begins 
-walking after Fiona) Oh! Whoa, whoa, 
-whoa. Hold on now. Where did that come 
-from?
+Segura as pontas. (solta o Burro e começa 
+a andar atrás de Fiona) Oh! Opa, opa, 
+opa. Espera aí. De onde veio 
+aquilo?
 
 FIONA
-What?
+O quê?
 
 SHREK
-That! Back there. That was amazing! 
-Where did you learn that?
+Aquilo! Lá atrás. Aquilo foi incrível! 
+Onde você aprendeu isso?
 
 FIONA
-Well...(laughs) when one lives alone, 
-uh, one has to learn these things in 
-case there's a...(gasps and points) 
-there's an arrow in your butt!
+Bem...(ri) quando se vive sozinha, 
+uh, tem-se que aprender essas coisas no 
+caso de haver um...(suspira e aponta) 
+tem uma flecha na sua bunda!
 
 SHREK
-What? (turns and looks) Oh, would you 
-look at that? (he goes to pull it out 
-but flinches because it's tender)
-
-
-FIONA
-Oh, no. This is all my fault. I'm so 
-sorry.
-
-DONKEY
-(walking up) Why? What's wrong?
+O quê? (se vira e olha) Oh, olha 
+só pra isso? (ele vai puxar, 
+mas estremece porque está sensível)
 
 FIONA
-Shrek's hurt.
+Oh, não. Isso é tudo culpa minha. Sinto 
+muito.
 
-DONKEY
-Shrek's hurt. Shrek's hurt? Oh, no, 
-Shrek's gonna die.
+BURRO
+(chegando) Por quê? O que há de errado?
+
+FIONA
+Shrek está ferido.
+
+BURRO
+Shrek está ferido. Shrek está ferido? Oh, não, 
+Shrek vai morrer.
 
 SHREK
-Donkey, I'm okay.
+Burro, estou bem.
 
-DONKEY
-You can't do this to me, Shrek. I'm 
-too young for you to die. Keep you legs 
-elevated. Turn your head and cough. 
-Does anyone know the Heimlich?
+BURRO
+Você não pode fazer isso comigo, Shrek. Eu sou 
+muito jovem para você morrer. Mantenha suas pernas 
+elevadas. Vire a cabeça e tussa. 
+Alguém conhece a manobra de Heimlich?
 
 FIONA
-Donkey! Calm down. If you want to help 
-Shrek, run into the woods and find me 
-a blue flower with red thorns.
+Burro! Acalme-se. Se você quer ajudar 
+o Shrek, corra para a floresta e me encontre 
+uma flor azul com espinhos vermelhos.
 
-DONKEY
-Blue flower, red thorns. Okay, I'm on 
-it. Blue flower, red thorns. Don't die 
-Shrek. If you see a long tunnel, stay 
-away from the light!
+BURRO
+Flor azul, espinhos vermelhos. Ok, estou indo. 
+Flor azul, espinhos vermelhos. Não morra 
+Shrek. Se você ver um longo túnel, fique 
+longe da luz!
 
 SHREK & FIONA
-Donkey!
+Burro!
 
-DONKEY
-Oh, yeah. Right. Blue flower, red thorns. 
-(runs off)
+BURRO
+Ah, é. Certo. Flor azul, espinhos vermelhos. 
+(sai correndo)
 
 SHREK
-What are the flowers for?
+Para que servem as flores?
 
 FIONA
-(like it's obvious) For getting rid 
-of Donkey.
+(como se fosse óbvio) Para nos livrarmos 
+do Burro.
 
 SHREK
 Ah.
 
 FIONA
-Now you hold still, and I'll yank this 
-thing out. (gives the arrow a little 
-pull)
+Agora fique quieto, e eu vou puxar essa 
+coisa para fora. (dá um puxãozinho na flecha)
 
 SHREK
-(jumps away) Ow! Hey! Easy with the 
-yankin'.
+(pula para longe) Ai! Ei! Cuidado com o 
+puxão.
 
-As they continue to talk Fiona keeps going after the arrow and 
-Shrek keeps dodging her hands.
+Enquanto continuam a conversar, Fiona continua tentando pegar a flecha e 
+Shrek continua desviando das mãos dela.
 
 FIONA
-I'm sorry, but it has to come out.
-
+Sinto muito, mas tem que sair.
 
 SHREK
-No, it's tender.
+Não, está sensível.
 
 FIONA
-Now, hold on.
+Agora, espere.
 
 SHREK
-What you're doing is the opposite of 
-help.
+O que você está fazendo é o oposto de 
+ajudar.
 
 FIONA
-Don't move.
+Não se mexa.
 
 SHREK
-Look, time out.
+Olha, tempo.
 
 FIONA
-Would you...(grunts as Shrek puts his 
-hand over her face to stop her from 
-getting at the arrow) Okay. What do 
-you propose we do?
+Você poderia...(grunhe enquanto Shrek coloca a 
+mão sobre o rosto dela para impedi-la de 
+chegar na flecha) Ok. O que você 
+propõe que façamos?
 
-ELSEWHERE
+EM OUTRO LUGAR
 
-Donkey is still looking for the special flower.
+Burro ainda está procurando a flor especial.
 
-DONKEY
-Blue flower, red thorns. Blue flower, 
-red thorns. Blue flower, red thorns. 
-This would be so much easier if I wasn't 
-color-blind! Blue flower, red thorns.
-
-
-SHREK
-(os) Ow!
-
-DONKEY
-Hold on, Shrek! I'm comin'! (rips a 
-flower off a nearby bush that just happens 
-to be a blue flower with red thorns)
-
-
-THE FOREST PATH
+BURRO
+Flor azul, espinhos vermelhos. Flor azul, 
+espinhos vermelhos. Flor azul, espinhos vermelhos. 
+Isso seria muito mais fácil se eu não fosse 
+daltônico! Flor azul, espinhos vermelhos.
 
 SHREK
-Ow! Not good.
+(fora de cena) Ai!
+
+BURRO
+Aguenta aí, Shrek! Estou indo! (arranca uma 
+flor de um arbusto próximo que por acaso 
+é uma flor azul com espinhos vermelhos)
+
+O CAMINHO DA FLORESTA
+
+SHREK
+Ai! Nada bom.
 
 FIONA
-Okay. Okay. I can nearly see the head. 
-(Shrek grunts as she pulls) It's just 
-about...
+Ok. Ok. Quase consigo ver a ponta. 
+(Shrek grunhe enquanto ela puxa) Está quase...
 
 SHREK
-Ow! Ohh! (he jerks and manages to fall 
-over with Fiona on top of him)
+Ai! Ohh! (ele se debate e consegue cair 
+com Fiona em cima dele)
 
-DONKEY
+BURRO
 Ahem.
 
 SHREK
-(throwing Fiona off of him) Nothing 
-happend. We were just, uh - -
+(tirando Fiona de cima dele) Nada 
+aconteceu. Estávamos apenas, uh - -
 
-DONKEY
-Look, if you wanted to be alone, all 
-you had to do was ask. Okay?
-
-SHREK
-Oh, come on! That's the last thing on 
-my mind. The princess here was just- 
-- (Fiona pulls the arrow out) Ugh! (he 
-turns to look at Fiona who holds up 
-the arrow with a smile) Ow!
-
-DONKEY
-Hey, what's that? (nervous chuckle) 
-That's...is that blood?
-
-Donkey faints. Shrek walks over and picks him up as they continue 
-on their way.
-
-There is a montage of scenes as the group heads back to DuLoc. 
-Shrek crawling up to the top of a tree to make it fall over a 
-small brook so that Fiona won't get wet. Shrek then gets up as 
-Donkey is just about to cross the tree and the tree swings back 
-into it's upright position and Donkey flies off. Shrek swatting 
-and a bunch of flies and mosquitoes. Fiona grabs a nearby spiderweb 
-that's on a tree branch and runs through the field swinging it 
-around to catch the bugs. She then hands it to Shrek who begins 
-eating like it's a treat. As he walks off she licks her fingers. 
-Shrek catching a toad and blowing it up like a balloon and presenting 
-it to Fiona. Fiona catching a snake, blowing it up, fashioning 
-it into a balloon animal and presenting it to Shrek. The group 
-arriving at a windmill that is near DuLoc.
-
-WINDMILL
+BURRO
+Olha, se vocês queriam ficar sozinhos, tudo 
+o que tinham a fazer era pedir. Ok?
 
 SHREK
-There it is, Princess. Your future awaits 
-you.
+Ah, qual é! Essa é a última coisa na 
+minha mente. A princesa aqui estava apenas- 
+- (Fiona puxa a flecha) Ugh! (ele 
+se vira para olhar para Fiona que segura 
+a flecha com um sorriso) Ai!
+
+BURRO
+Ei, o que é isso? (risada nervosa) 
+Isso é... isso é sangue?
+
+Burro desmaia. Shrek caminha até ele e o pega enquanto continuam 
+seu caminho.
+
+Há uma montagem de cenas enquanto o grupo volta para Duloc. 
+Shrek subindo no topo de uma árvore para fazê-la cair sobre um 
+pequeno riacho para que Fiona não se molhe. Shrek então se levanta quando 
+o Burro está prestes a cruzar a árvore e a árvore balança de volta 
+para sua posição vertical e o Burro voa longe. Shrek espantando 
+um monte de moscas e mosquitos. Fiona pega uma teia de aranha próxima 
+que está em um galho de árvore e corre pelo campo balançando-a 
+para pegar os insetos. Ela então a entrega para Shrek que começa 
+a comer como se fosse um petisco. Enquanto ele se afasta, ela lambe os dedos. 
+Shrek pegando um sapo e inflando-o como um balão e presenteando 
+Fiona. Fiona pegando uma cobra, inflando-a, moldando-a 
+em um animal de balão e presenteando Shrek. O grupo 
+chegando a um moinho de vento que fica perto de Duloc.
+
+MOINHO DE VENTO
+
+SHREK
+Lá está, Princesa. Seu futuro a espera.
 
 FIONA
-That's DuLoc?
+Aquilo é Duloc?
 
-DONKEY
-Yeah, I know. You know, Shrek thinks 
-Lord Farquaad's compensating for something, 
-which I think means he has a really...(Shrek 
-steps on his hoof) Ow!
+BURRO
+É, eu sei. Sabe, Shrek acha que 
+Lorde Farquaad está compensando algo, 
+o que eu acho que significa que ele tem um muito...(Shrek 
+pisa no casco dele) Ai!
 
 SHREK
-Um, I, uh- - I guess we better move 
-on.
+Um, eu, uh- - acho melhor continuarmos.
 
 FIONA
-Sure. But, Shrek? I'm - - I'm worried 
-about Donkey.
+Claro. Mas, Shrek? Estou - - estou preocupada 
+com o Burro.
 
 SHREK
-What?
+O quê?
 
 FIONA
-I mean, look at him. He doesn't look 
-so good.
+Quero dizer, olhe para ele. Ele não parece 
+muito bem.
 
-DONKEY
-What are you talking about? I'm fine.
-
-
-FIONA
-(kneels to look him in the eyes) That's 
-what they always say, and then next 
-thing you know, you're on your back. 
-(pause) Dead.
-
-SHREK
-You know, she's right. You look awful. 
-Do you want to sit down?
+BURRO
+Do que você está falando? Estou ótimo.
 
 FIONA
-Uh, you know, I'll make you some tea.
-
-
-DONKEY
-I didn't want to say nothin', but I 
-got this twinge in my neck, and when 
-I turn my head like this, look, (turns 
-his neck in a very sharp way until his 
-head is completely sideways) Ow! See?
-
+(ajoelha-se para olhar nos olhos dele) É 
+o que eles sempre dizem, e na próxima 
+coisa que você sabe, você está de costas. 
+(pausa) Morto.
 
 SHREK
-Who's hungry? I'll find us some dinner.
-
+Sabe, ela tem razão. Você parece horrível. 
+Quer se sentar?
 
 FIONA
-I'll get the firewood.
+Uh, sabe, vou fazer um chá para você.
 
-DONKEY
-Hey, where you goin'? Oh, man, I can't 
-feel my toes! (looks down and yelps) 
-I don't have any toes! I think I need 
-a hug.
+BURRO
+Eu não queria dizer nada, mas eu 
+tenho essa pontada no pescoço, e quando 
+eu viro minha cabeça assim, olha, (vira 
+o pescoço de uma maneira muito brusca até que sua 
+cabeça fique completamente de lado) Ai! Viu?
 
-SUNSET
-
-Shrek has built a fire and is cooking the rest of dinner while 
-Fiona eats.
+SHREK
+Quem está com fome? Vou encontrar nosso jantar.
 
 FIONA
-Mmm. This is good. This is really good. 
-What is this?
+Vou pegar a lenha.
 
-SHREK
-Uh, weed rat. Rotisserie style.
+BURRO
+Ei, onde vocês vão? Oh, cara, não consigo 
+sentir meus dedos! (olha para baixo e grita) 
+Eu não tenho dedos! Acho que preciso 
+de um abraço.
 
-FIONA
-No kidding. Well, this is delicious.
+PÔR DO SOL
 
-
-SHREK
-Well, they're also great in stews. Now, 
-I don't mean to brag, but I make a mean 
-weed rat stew. (chuckles)
-
-Fiona looks at DuLoc and sighs.
+Shrek fez uma fogueira e está cozinhando o resto do jantar enquanto 
+Fiona come.
 
 FIONA
-I guess I'll be dining a little differently 
-tomorrow night.
+Mmm. Isso é bom. Isso é muito bom. 
+O que é isso?
 
 SHREK
-Maybe you can come visit me in the swamp 
-sometime. I'll cook all kind of stuff 
-for you. Swamp toad soup, fish eye tartare 
-- - you name it.
+Uh, rato do mato. Estilo rotisserie.
 
 FIONA
-(smiles) I'd like that.
-
-They smiles at each other.
+Não brinca. Bem, isso está delicioso.
 
 SHREK
-Um, Princess?
+Bem, eles também são ótimos em ensopados. Agora, 
+não quero me gabar, mas eu faço um ensopado 
+de rato do mato incrível. (ri)
+
+Fiona olha para Duloc e suspira.
 
 FIONA
-Yes, Shrek?
+Acho que jantarei um pouco diferente 
+amanhã à noite.
 
 SHREK
-I, um, I was wondering...are you...(sighs) 
-Are you gonna eat that?
-
-DONKEY
-(chuckles) Man, isn't this romantic? 
-Just look at that sunset.
+Talvez você possa me visitar no pântano 
+algum dia. Eu cozinho todo tipo de coisa 
+para você. Sopa de sapo do pântano, tartar de olho de peixe 
+- - o que você quiser.
 
 FIONA
-(jumps up) Sunset? Oh, no! I mean, it's 
-late. I-It's very late.
+(sorri) Eu gostaria disso.
+
+Eles sorriem um para o outro.
 
 SHREK
-What?
-
-DONKEY
-Wait a minute. I see what's goin' on 
-here. You're afraid of the dark, aren't 
-you?
+Um, Princesa?
 
 FIONA
-Yes! Yes, that's it. I'm terrified. 
-You know, I'd better go inside.
+Sim, Shrek?
 
-DONKEY
-Don't feel bad, Princess. I used to 
-be afraid of the dark, too, until - 
-- Hey, no, wait. I'm still afraid of 
-the dark.
+SHREK
+Eu, hum, eu estava pensando... você vai...(suspira) 
+Você vai comer isso?
 
-Shrek sighs
+BURRO
+(ri) Cara, isso não é romântico? 
+Olha só aquele pôr do sol.
 
 FIONA
-Good night.
+(levanta de um pulo) Pôr do sol? Oh, não! Quero dizer, é 
+tarde. E-Está muito tarde.
 
 SHREK
-Good night.
+O quê?
 
-Fiona goes inside the windmill and closes the door. Donkey looks 
-at Shrek with a new eye.
+BURRO
+Espere um minuto. Eu vejo o que está acontecendo 
+aqui. Você tem medo do escuro, não tem?
 
-DONKEY
-Ohh! Now I really see what's goin' on 
-here.
+FIONA
+Sim! Sim, é isso. Estou apavorada. 
+Sabe, é melhor eu entrar.
 
-SHREK
-Oh, what are you talkin' about?
+BURRO
+Não se sinta mal, Princesa. Eu costumava 
+ter medo do escuro também, até que - 
+- Ei, não, espere. Eu ainda tenho medo do 
+escuro.
 
-DONKEY
-I don't even wanna hear it. Look, I'm 
-an animal, and I got instincts. And 
-I know you two were diggin' on each 
-other. I could feel it.
+Shrek suspira
 
-SHREK
-You're crazy. I'm just bringing her 
-back to Farquaad.
-
-DONKEY
-Oh, come on, Shrek. Wake up and smell 
-the pheromones. Just go on in and tell 
-her how you feel.
+FIONA
+Boa noite.
 
 SHREK
-I- - There's nothing to tell. Besides, 
-even if I did tell her that, well, you 
-know - - and I'm not sayin' I do 'cause 
-I don't - - she's a princess, and I'm 
+Boa noite.
+
+Fiona entra no moinho de vento e fecha a porta. Burro olha 
+para Shrek com um novo olhar.
+
+BURRO
+Ohh! Agora eu realmente vejo o que está acontecendo 
+aqui.
+
+SHREK
+Oh, do que você está falando?
+
+BURRO
+Eu nem quero ouvir. Olha, eu sou 
+um animal, e tenho instintos. E 
+eu sei que vocês dois estavam a fim um 
+do outro. Eu pude sentir.
+
+SHREK
+Você é louco. Só estou levando ela 
+de volta para Farquaad.
+
+BURRO
+Ah, qual é, Shrek. Acorda e sinta 
+os feromônios. Apenas entre lá e diga 
+a ela como você se sente.
+
+SHREK
+Eu- - Não há nada para contar. Além disso, 
+mesmo se eu dissesse isso a ela, bem, você 
+sabe - - e não estou dizendo que sinto porque 
+não sinto - - ela é uma princesa, e eu sou 
 - -
 
-DONKEY
-An ogre?
+BURRO
+Um ogro?
 
 SHREK
-Yeah. An ogre.
+Sim. Um ogro.
 
-DONKEY
-Hey, where you goin'?
+BURRO
+Ei, onde você vai?
 
 SHREK
-To get... move firewood. (sighs)
+Pegar... mais lenha. (suspira)
 
-Donkey looks over at the large pile of firewood there already 
-is.
+Burro olha para a grande pilha de lenha que já existe.
 
-TIME LAPSE
+LAPSO DE TEMPO
 
-Donkey opens the door to the Windmill and walks in. Fiona is 
-nowhere to be seen.
+Burro abre a porta do Moinho de Vento e entra. Fiona não 
+está em lugar nenhum.
 
-DONKEY
-Princess? Princess Fiona? Princess, 
-where are you? Princess?
+BURRO
+Princesa? Princesa Fiona? Princesa, 
+onde você está? Princesa?
 
-Fiona looks at Donkey from the shadows, but we can't see her.
+Fiona olha para o Burro das sombras, mas não conseguimos vê-la.
 
+BURRO
+Está muito assustador aqui. Não estou de brincadeira.
 
-DONKEY
-It's very spooky in here. I ain't playing 
-no games.
+De repente, Fiona cai do corrimão. Ela se levanta só que não 
+se parece com ela mesma. Ela se parece com um ogro e o Burro começa a surtar.
 
-Suddenly Fiona falls from the railing. She gets up only she doesn't 
-look like herself. She looks like an ogre and Donkey starts freaking 
-out.
-
-DONKEY
+BURRO
 Aah!
 
 FIONA
-Oh, no!
+Oh, não!
 
-DONKEY
-No, help!
+BURRO
+Não, socorro!
 
 FIONA
 Shh!
 
-DONKEY
+BURRO
 Shrek! Shrek! Shrek!
 
 FIONA
-No, it's okay. It's okay.
+Não, está tudo bem. Está tudo bem.
 
-DONKEY
-What did you do with the princess?
-
+BURRO
+O que você fez com a princesa?
 
 FIONA
-Donkey, I'm the princess.
+Burro, eu sou a princesa.
 
-DONKEY
+BURRO
 Aah!
 
 FIONA
-It's me, in this body.
+Sou eu, neste corpo.
 
-DONKEY
-Oh, my God! You ate the princess. (to 
-her stomach) Can you hear me?
-
-FIONA
-Donkey!
-
-DONKEY
-(still aimed at her stomach) Listen, 
-keep breathing! I'll get you out of 
-there!
+BURRO
+Oh, meu Deus! Você comeu a princesa. (para 
+a barriga dela) Você consegue me ouvir?
 
 FIONA
-No!
+Burro!
 
-DONKEY
+BURRO
+(ainda mirando na barriga dela) Escute, 
+continue respirando! Eu vou te tirar daí!
+
+FIONA
+Não!
+
+BURRO
 Shrek! Shrek! Shrek!
 
 FIONA
 Shh.
 
-DONKEY
+BURRO
 Shrek!
 
 FIONA
-This is me.
+Sou eu.
 
-Donkey looks into her eyes as she pets his muzzle, and he quiets 
-down.
+Burro olha nos olhos dela enquanto ela acaricia o focinho dele, e ele se acalma.
 
-DONKEY
-Princess? What happened to you? You're, 
-uh, uh, uh, different.
-
-FIONA
-I'm ugly, okay?
-
-DONKEY
-Well, yeah! Was it something you ate? 
-'Cause I told Shrek those rats was a 
-bad idea. You are what you eat, I said. 
-Now - -
+BURRO
+Princesa? O que aconteceu com você? Você está, 
+uh, uh, uh, diferente.
 
 FIONA
-No. I - - I've been this way as long 
-as I can remember.
+Eu sou feia, ok?
 
-DONKEY
-What do you mean? Look, I ain't never 
-seen you like this before.
-
-FIONA
-It only happens when sun goes down. 
-"By night one way, by day another. This 
-shall be the norm... until you find 
-true love's first kiss... and then take 
-love's true form."
-
-DONKEY
-Ah, that's beautiful. I didn't know 
-you wrote poetry.
+BURRO
+Bem, sim! Foi algo que você comeu? 
+Porque eu disse ao Shrek que aqueles ratos eram uma 
+má ideia. Você é o que você come, eu disse. 
+Agora - -
 
 FIONA
-It's a spell. (sigh) When I was a little 
-girl, a witch cast a spell on me. Every 
-night I become this. This horrible, 
-ugly beast! I was placed in a tower 
-to await the day my true love would 
-rescue me. That's why I have to marry 
-Lord Farquaad tomorrow before the sun 
-sets and he sees me like this. (begins 
-to cry)
+Não. Eu - - Eu sou assim desde que 
+me lembro.
 
-DONKEY
-All right, all right. Calm down. Look, 
-it's not that bad. You're not that ugly. 
-Well, I ain't gonna lie. You are ugly. 
-But you only look like this at night. 
-Shrek's ugly 24-7.
+BURRO
+O que você quer dizer? Olha, eu nunca 
+te vi assim antes.
 
 FIONA
-But Donkey, I'm a princess, and this 
-is not how a princess is meant to look.
+Só acontece quando o sol se põe. 
+"De noite de um jeito, de dia de outro. Esta 
+será a norma... até que encontre 
+o primeiro beijo do amor verdadeiro... e então tome 
+a verdadeira forma do amor."
 
+BURRO
+Ah, isso é lindo. Eu não sabia 
+que você escrevia poesia.
 
-DONKEY
-Princess, how 'bout if you don't marry 
+FIONA
+É um feitiço. (suspira) Quando eu era uma garotinha, 
+uma bruxa lançou um feitiço em mim. Toda 
+noite eu me torno isso. Essa besta horrível 
+e feia! Fui colocada em uma torre 
+para aguardar o dia em que meu verdadeiro amor me 
+resgataria. É por isso que tenho que me casar com 
+Lorde Farquaad amanhã antes que o sol 
+se ponha e ele me veja assim. (começa 
+a chorar)
+
+BURRO
+Tudo bem, tudo bem. Acalme-se. Olha, 
+não é tão ruim. Você não é tão feia. 
+Bem, não vou mentir. Você é feia. 
+Mas você só fica assim à noite. 
+Shrek é feio 24 horas por dia.
+
+FIONA
+Mas Burro, eu sou uma princesa, e essa 
+não é a aparência que uma princesa deve ter.
+
+BURRO
+Princesa, que tal se você não se casar com 
 Farquaad?
 
 FIONA
-I have to. Only my true love's kiss 
-can break the spell.
+Eu tenho que casar. Só o beijo do meu verdadeiro amor 
+pode quebrar o feitiço.
 
-DONKEY
-But, you know, um, you're kind of an 
-orge, and Shrek - - well, you got a 
-lot in common.
+BURRO
+Mas, sabe, hum, você é meio que um 
+ogro, e Shrek - - bem, vocês têm 
+muito em comum.
 
 FIONA
 Shrek?
 
-OUTSIDE
+LÁ FORA
 
-Shrek is walking towards the windmill with a sunflower in his 
-hand.
-
-SHREK
-(to himself) Princess, I - - Uh, how's 
-it going, first of all? Good? Um, good 
-for me too. I'm okay. I saw this flower 
-and thought of you because it's pretty 
-and - - well, I don't really like it, 
-but I thought you might like it 'cause 
-you're pretty. But I like you anyway. 
-I'd - - uh, uh...(sighs) I'm in trouble. 
-Okay, here we go.
-
-He walks up to the door and pauses outside when he hears Donkey 
-and Fiona talking.
-
-FIONA
-(os) I can't just marry whoever I want. 
-Take a good look at me, Donkey. I mean, 
-really, who can ever love a beast so 
-hideous and ugly? "Princess" and "ugly" 
-don't go together. That's why I can't 
-stay here with Shrek.
-
-Shrek steps back in shock.
-
-FIONA
-(os) My only chance to live happily 
-ever after is to marry my true love.
-
-
-Shrek heaves a deep sigh. He throws the flower down and walks 
-away.
-
-INSIDE
-
-FIONA
-Don't you see, Donkey? That's just how 
-it has to be. It's the only way to break 
-the spell.
-
-DONKEY
-You at least gotta tell Shrek the truth.
-
-
-FIONA
-No! You can't breathe a word. No one 
-must ever know.
-
-DONKEY
-What's the point of being able to talk 
-if you gotta keep secrets?
-
-FIONA
-Promise you won't tell. Promise!
-
-DONKEY
-All right, all right. I won't tell him. 
-But you should. (goes outside) I just 
-know before this is over, I'm gonna 
-need a whole lot of serious therapy. 
-Look at my eye twitchin'.
-
-Fiona comes out the door and watches him walk away. She looks 
-down and spots the sunflower. She picks it up before going back 
-inside the windmill.
-
-MORNING
-
-Donkey is asleep. Shrek is nowhere to be seen. Fiona is still 
-awake. She is plucking petals from the sunflower.
-
-FIONA
-I tell him, I tell him not. I tell him, 
-I tell him not. I tell him. (she quickly 
-runs to the door and goes outside) Shrek! 
-Shrek, there's something I want...(she 
-looks and sees the rising sun, and as 
-the sun crests the sky she turns back 
-into a human.)
-
-Just as she looks back at the sun she sees Shrek stomping towards 
-her.
-
-FIONA
-Shrek. Are you all right?
+Shrek está caminhando em direção ao moinho de vento com um girassol na 
+mão.
 
 SHREK
-Perfect! Never been better.
+(para si mesmo) Princesa, eu - - Uh, como 
+vai, antes de tudo? Bem? Hum, bem 
+para mim também. Estou bem. Eu vi esta flor 
+e pensei em você porque é bonita 
+e - - bem, eu não gosto muito dela, 
+mas pensei que você poderia gostar porque 
+você é bonita. Mas eu gosto de você de qualquer maneira. 
+Eu - - uh, uh...(suspira) Estou encrencado. 
+Ok, lá vamos nós.
+
+Ele caminha até a porta e para do lado de fora quando ouve Burro 
+e Fiona conversando.
 
 FIONA
-I - - I don't - - There's something 
-I have to tell you.
+(fora de cena) Eu não posso simplesmente me casar com quem eu quiser. 
+Dê uma boa olhada em mim, Burro. Quero dizer, 
+realmente, quem poderia amar uma besta tão 
+horrível e feia? "Princesa" e "feia" 
+não combinam. É por isso que não posso 
+ficar aqui com o Shrek.
 
-SHREK
-You don't have to tell me anything, 
-Princess. I heard enough last night.
-
-
-FIONA
-You heard what I said?
-
-SHREK
-Every word.
+Shrek recua em choque.
 
 FIONA
-I thought you'd understand.
+(fora de cena) Minha única chance de viver feliz 
+para sempre é me casar com meu verdadeiro amor.
 
-SHREK
-Oh, I understand. Like you said, "Who 
-could love a hideous, ugly beast?"
+Shrek dá um suspiro profundo. Ele joga a flor no chão e vai 
+embora.
 
+DENTRO
 
 FIONA
-But I thought that wouldn't matter to 
-you.
+Não vê, Burro? É assim que 
+tem que ser. É a única maneira de quebrar 
+o feitiço.
+
+BURRO
+Você pelo menos tem que contar a verdade ao Shrek.
+
+FIONA
+Não! Você não pode dizer uma palavra. Ninguém 
+deve saber jamais.
+
+BURRO
+Qual é o sentido de poder falar 
+se você tem que guardar segredos?
+
+FIONA
+Prometa que não vai contar. Prometa!
+
+BURRO
+Tudo bem, tudo bem. Não vou contar a ele. 
+Mas você deveria. (vai para fora) Eu apenas 
+sei que antes que isso acabe, vou 
+precisar de muita terapia séria. 
+Olha meu olho tremendo.
+
+Fiona sai pela porta e o vê ir embora. Ela olha 
+para baixo e vê o girassol. Ela o pega antes de voltar 
+para dentro do moinho de vento.
+
+MANHÃ
+
+Burro está dormindo. Shrek não está em lugar nenhum. Fiona ainda está 
+acordada. Ela está arrancando pétalas do girassol.
+
+FIONA
+Eu conto, não conto. Eu conto, 
+não conto. Eu conto. (ela corre rapidamente 
+para a porta e vai para fora) Shrek! 
+Shrek, tem algo que eu quero...(ela 
+olha e vê o sol nascente, e conforme 
+o sol sobe no céu ela se transforma de volta 
+em humana.)
+
+Assim que ela olha de volta para o sol, ela vê Shrek marchando em direção 
+a ela.
+
+FIONA
+Shrek. Você está bem?
 
 SHREK
-Yeah? Well, it does. (Fiona looks at 
-him in shock. He looks past her and 
-spots a group approaching.) Ah, right 
-on time. Princess, I've brought you 
-a little something.
+Perfeito! Nunca estive melhor.
 
-Farquaad has arrived with a group of his men. He looks very regal 
-sitting up on his horse. You would never guess that he's only 
-like 3 feet tall. Donkey wakes up with a yawn as the soldiers 
-march by.
+FIONA
+Eu - - Eu não - - Tem algo 
+que eu tenho que te contar.
 
-DONKEY
-What'd I miss? What'd I miss? (spots 
-the soldiers) (muffled) Who said that? 
-Couldn't have been the donkey.
+SHREK
+Você não tem que me contar nada, 
+Princesa. Já ouvi o suficiente ontem à noite.
+
+FIONA
+Você ouviu o que eu disse?
+
+SHREK
+Cada palavra.
+
+FIONA
+Eu pensei que você entenderia.
+
+SHREK
+Ah, eu entendo. Como você disse, "Quem 
+poderia amar uma besta horrível e feia?"
+
+FIONA
+Mas eu pensei que isso não importaria para 
+você.
+
+SHREK
+É? Bem, importa. (Fiona olha para 
+ele em choque. Ele olha além dela e 
+vê um grupo se aproximando.) Ah, bem 
+na hora. Princesa, eu trouxe para você 
+uma coisinha.
+
+Farquaad chegou com um grupo de seus homens. Ele parece muito majestoso 
+sentado em seu cavalo. Você nunca imaginaria que ele tem apenas 
+tipo um metro de altura. Burro acorda com um bocejo enquanto os soldados 
+marcham.
+
+BURRO
+O que eu perdi? O que eu perdi? (vê 
+os soldados) (abafado) Quem disse isso? 
+Não pode ter sido o burro.
 
 FARQUAAD
-Princess Fiona.
+Princesa Fiona.
 
 SHREK
-As promised. Now hand it over.
+Como prometido. Agora entregue.
 
 FARQUAAD
-Very well, ogre. (holds out a piece 
-of paper) The deed to your swamp, cleared 
-out, as agreed. Take it and go before 
-I change my mind. (Shrek takes the paper) 
-Forgive me, Princess, for startling 
-you, but you startled me, for I have 
-never seen such a radiant beauty before. 
-I'm Lord Farquaad.
+Muito bem, ogro. (estende um pedaço 
+de papel) A escritura do seu pântano, limpo, 
+como combinado. Pegue e vá antes que 
+eu mude de ideia. (Shrek pega o papel) 
+Perdoe-me, Princesa, por assustá-la, 
+mas você me assustou, pois nunca 
+vi uma beleza tão radiante antes. 
+Sou Lorde Farquaad.
 
 FIONA
-Lord Farquaad? Oh, no, no. (Farquaad 
-snaps his fingers) Forgive me, my lord, 
-for I was just saying a short... (Watches 
-as Farquaad is lifted off his horse 
-and set down in front of her. He comes 
-to her waist.) farewell.
+Lorde Farquaad? Oh, não, não. (Farquaad 
+estala os dedos) Perdoe-me, meu senhor, 
+pois eu estava apenas dizendo um breve... (Observa 
+enquanto Farquaad é levantado de seu cavalo 
+e colocado na frente dela. Ele chega 
+à cintura dela.) adeus.
 
 FARQUAAD
-Oh, that is so sweet. You don't have 
-to waste good manners on the ogre. It's 
-not like it has feelings.
+Oh, isso é tão doce. Você não precisa 
+gastar boas maneiras com o ogro. Não é 
+como se ele tivesse sentimentos.
 
 FIONA
-No, you're right. It doesn't.
+Não, você está certo. Ele não tem.
 
-Donkey watches this exchange with a curious look on his face.
-
+Burro observa essa troca com um olhar curioso no rosto.
 
 FARQUAAD
-Princess Fiona, beautiful, fair, flawless 
-Fiona. I ask your hand in marriage. 
-Will you be the perfect bride for the 
-perfect groom?
+Princesa Fiona, bela, justa, impecável 
+Fiona. Peço sua mão em casamento. 
+Você será a noiva perfeita para o 
+noivo perfeito?
 
 FIONA
-Lord Farquaad, I accept. Nothing would 
-make - -
+Lorde Farquaad, eu aceito. Nada me faria 
+mais - -
 
 FARQUAAD
-(interrupting) Excellent! I'll start 
-the plans, for tomorrow we wed!
+(interrompendo) Excelente! Começarei 
+os planos, pois amanhã nos casamos!
 
 FIONA
-No! I mean, uh, why wait? Let's get 
-married today before the sun sets.
-
+Não! Quero dizer, uh, por que esperar? Vamos nos 
+casar hoje antes do sol se pôr.
 
 FARQUAAD
-Oh, anxious, are you? You're right. 
-The sooner, the better. There's so much 
-to do! There's the caterer, the cake, 
-the band, the guest list. Captain, round 
-up some guests! (a guard puts Fiona 
-on the back of his horse)
+Oh, ansiosa, você está? Você está certa. 
+Quanto antes, melhor. Há tanto 
+para fazer! Tem o buffet, o bolo, 
+a banda, a lista de convidados. Capitão, reúna 
+alguns convidados! (um guarda coloca Fiona 
+na garupa do seu cavalo)
 
 FIONA
-Fare-thee-well, ogre.
+Adeus, ogro.
 
-Farquaad's whole party begins to head back to DuLoc. Donkey watches 
-them go.
+Todo o grupo de Farquaad começa a voltar para Duloc. Burro os vê 
+partir.
 
-DONKEY
-Shrek, what are you doing? You're letting 
-her get away.
+BURRO
+Shrek, o que você está fazendo? Você está deixando 
+ela ir embora.
 
 SHREK
-Yeah? So what?
+É? E daí?
 
-DONKEY
-Shrek, there's something about her you 
-don't know. Look, I talked to her last 
-night, She's - -
-
-SHREK
-I know you talked to her last night. 
-You're great pals, aren't ya? Now, if 
-you two are such good friends, why don't 
-you follow her home?
-
-DONKEY
-Shrek, I - - I wanna go with you.
+BURRO
+Shrek, tem algo sobre ela que você 
+não sabe. Olha, eu falei com ela ontem 
+à noite, ela é - -
 
 SHREK
-I told you, didn't I? You're not coming 
-home with me. I live alone! My swamp! 
-Me! Nobody else! Understand? Nobody! 
-Especially useless, pathetic, annoying, 
-talking donkeys!
+Eu sei que você falou com ela ontem à noite. 
+Vocês são grandes amigos, não são? Agora, se 
+vocês dois são tão bons amigos, por que você não 
+a segue até em casa?
 
-DONKEY
-But I thought - -
+BURRO
+Shrek, eu - - eu quero ir com você.
 
 SHREK
-Yeah. You know what? You thought wrong! 
-(stomps off)
+Eu te disse, não disse? Você não vem 
+para casa comigo. Eu moro sozinho! Meu pântano! 
+Eu! Ninguém mais! Entendeu? Ninguém! 
+Especialmente burros falantes, inúteis, 
+patéticos e irritantes!
 
-DONKEY
+BURRO
+Mas eu pensei - -
+
+SHREK
+É. Sabe de uma coisa? Você pensou errado! 
+(sai pisando duro)
+
+BURRO
 Shrek.
 
-Montage of different scenes. Shrek arriving back home. Fiona 
-being fitted for the wedding dress. Donkey at a stream running 
-into the dragon. Shrek cleaning up his house. Fiona eating dinner 
-alone. Shrek eating dinner alone.
+Montagem de cenas diferentes. Shrek chegando de volta em casa. Fiona 
+sendo medida para o vestido de noiva. Burro em um riacho encontrando 
+o dragão. Shrek limpando sua casa. Fiona jantando 
+sozinha. Shrek jantando sozinho.
 
-SHREK'S HOME
+CASA DO SHREK
 
-Shrek is eating dinner when he hears a sound outside. He goes 
-outside to investigate.
-
-SHREK
-Donkey? (Donkey ignores him and continues 
-with what he's doing.) What are you 
-doing?
-
-DONKEY
-I would think, of all people, you would 
-recognize a wall when you see one.
-
+Shrek está jantando quando ouve um som lá fora. Ele vai 
+para fora investigar.
 
 SHREK
-Well, yeah. But the wall's supposed 
-to go around my swamp, not through it.
+Burro? (Burro o ignora e continua 
+com o que está fazendo.) O que você está 
+fazendo?
 
-
-DONKEY
-It is around your half. See that's your 
-half, and this is my half.
-
-SHREK
-Oh! Your half. Hmm.
-
-DONKEY
-Yes, my half. I helped rescue the princess. 
-I did half the work. I get half the 
-booty. Now hand me that big old rock, 
-the one that looks like your head.
-
+BURRO
+Eu pensaria que, de todas as pessoas, você 
+reconheceria um muro quando visse um.
 
 SHREK
-Back off!
+Bem, sim. Mas o muro deveria 
+dar a volta no meu pântano, não passar por ele.
 
-DONKEY
-No, you back off.
-
-SHREK
-This is my swamp!
-
-DONKEY
-Our swamp.
+BURRO
+Está ao redor da sua metade. Veja, essa é a sua 
+metade, e esta é a minha metade.
 
 SHREK
-(grabs the tree branch Donkey is working 
-with) Let go, Donkey!
+Oh! Sua metade. Hmm.
 
-DONKEY
-You let go.
-
-SHREK
-Stubborn jackass!
-
-DONKEY
-Smelly ogre.
+BURRO
+Sim, minha metade. Eu ajudei a resgatar a princesa. 
+Eu fiz metade do trabalho. Eu ganho metade do 
+espólio. Agora me dê aquela pedra grande e velha, 
+aquela que parece com a sua cabeça.
 
 SHREK
-Fine! (drops the tree branch and walks 
-away)
+Cai fora!
 
-DONKEY
-Hey, hey, come back here. I'm not through 
-with you yet.
+BURRO
+Não, cai fora você.
 
 SHREK
-Well, I'm through with you.
+Este é o meu pântano!
 
-DONKEY
-Uh-uh. You know, with you it's always, 
-"Me, me, me!" Well, guess what! Now 
-it's my turn! So you just shut up and 
-pay attention! You are mean to me. You 
-insult me and you don't appreciate anything 
-that I do! You're always pushing me 
-around or pushing me away.
+BURRO
+Nosso pântano.
 
 SHREK
-Oh, yeah? Well, if I treated you so 
-bad, how come you came back?
+(agarra o galho da árvore com que Burro está trabalhando) 
+Solta, Burro!
 
-DONKEY
-Because that's what friends do! They 
-forgive each other!
-
-SHREK
-Oh, yeah. You're right, Donkey. I forgive 
-you... for stabbin' me in the back! 
-(goes into the outhouse and slams the 
-door)
-
-DONKEY
-Ohh! You're so wrapped up in layers, 
-onion boy, you're afraid of your own 
-feelings.
+BURRO
+Solta você.
 
 SHREK
-(os) Go away!
+Jumento teimoso!
 
-DONKEY
-There you are , doing it again just 
-like you did to Fiona. All she ever 
-do was like you, maybe even love you.
-
+BURRO
+Ogro fedido.
 
 SHREK
-(os) Love me? She said I was ugly, a 
-hideous creature. I heard the two of 
-you talking.
+Ótimo! (solta o galho da árvore e vai 
+embora)
 
-DONKEY
-She wasn't talkin' about you. She was 
-talkin' about, uh, somebody else.
-
+BURRO
+Ei, ei, volte aqui. Não terminei 
+com você ainda.
 
 SHREK
-(opens the door and comes out) She wasn't 
-talking about me? Well, then who was 
-she talking about?
+Bem, eu terminei com você.
 
-DONKEY
-Uh-uh, no way. I ain't saying anything. 
-You don't wanna listen to me. Right? 
-Right?
-
-SHREK
-Donkey!
-
-DONKEY
-No!
+BURRO
+Uh-uh. Sabe, com você é sempre, 
+"Eu, eu, eu!" Bem, adivinhe! Agora 
+é a minha vez! Então cale a boca e 
+preste atenção! Você é mau comigo. Você 
+me insulta e não aprecia nada 
+do que eu faço! Você está sempre me empurrando 
+ou me afastando.
 
 SHREK
-Okay, look. I'm sorry, all right? (sigh) 
-I'm sorry. I guess I am just a big, 
-stupid, ugly ogre. Can you forgive me?
+Ah, é? Bem, se eu te tratei tão 
+mal, por que você voltou?
 
-
-DONKEY
-Hey, that's what friends are for, right?
-
+BURRO
+Porque é isso que amigos fazem! Eles 
+perdoam um ao outro!
 
 SHREK
-Right. Friends?
+Ah, é. Você tem razão, Burro. Eu te perdoo... 
+por me apunhalar pelas costas! 
+(entra no banheiro externo e bate a 
+porta)
 
-DONKEY
-Friends.
-
-SHREK
-So, um, what did Fiona say about me?
-
-
-DONKEY
-What are you asking me for? Why don't 
-you just go ask her?
+BURRO
+Ohh! Você está tão envolto em camadas, 
+garoto cebola, que tem medo de seus próprios 
+sentimentos.
 
 SHREK
-The wedding! We'll never make it in 
-time.
+(fora de cena) Vá embora!
 
-DONKEY
-Ha-ha-ha! Never fear, for where, there's 
-a will, there's a way and I have a way. 
-(whistles)
-
-Suddenly the dragon arrives overhead and flies low enough so 
-they can climb on.
+BURRO
+Aí está você, fazendo de novo exatamente 
+como fez com a Fiona. Tudo o que ela sempre 
+fez foi gostar de você, talvez até te amar.
 
 SHREK
-Donkey?
+(fora de cena) Me amar? Ela disse que eu era feio, uma 
+criatura horrível. Eu ouvi vocês dois 
+conversando.
 
-DONKEY
-I guess it's just my animal magnetism.
-
-
-They both laugh.
+BURRO
+Ela não estava falando de você. Ela estava 
+falando de, uh, outra pessoa.
 
 SHREK
-Aw, come here, you. (gives Donkey a 
-noogie)
+(abre a porta e sai) Ela não estava 
+falando de mim? Bem, então de quem 
+ela estava falando?
 
-DONKEY
-All right, all right. Don't get all 
-slobbery. No one likes a kiss ass. All 
-right, hop on and hold on tight. I haven't 
-had a chance to install the seat belts 
-yet.
+BURRO
+Uh-uh, de jeito nenhum. Eu não vou dizer nada. 
+Você não quer me ouvir. Certo? 
+Certo?
 
-They climb aboard the dragon and she takes off for DuLoc.
+SHREK
+Burro!
 
-DULOC - CHURCH
+BURRO
+Não!
 
-Fiona and Farquaad are getting married. The whole town is there. 
-The prompter card guy holds up a card that says 'Revered Silence'.
+SHREK
+Ok, olha. Me desculpe, está bem? (suspira) 
+Sinto muito. Acho que sou apenas um ogro grande, 
+estúpido e feio. Você pode me perdoar?
 
+BURRO
+Ei, é para isso que servem os amigos, certo?
 
-PRIEST
-People of DuLoc, we gather here today 
-to bear witness to the union....
+SHREK
+Certo. Amigos?
+
+BURRO
+Amigos.
+
+SHREK
+Então, hum, o que a Fiona disse sobre mim?
+
+BURRO
+Por que você está me perguntando? Por que não 
+vai perguntar a ela?
+
+SHREK
+O casamento! Nunca chegaremos a tempo.
+
+BURRO
+Ha-ha-ha! Não tema, pois onde há 
+vontade, há um caminho e eu tenho um caminho. 
+(assobia)
+
+De repente, o dragão chega voando baixo o suficiente para que 
+eles possam subir.
+
+SHREK
+Burro?
+
+BURRO
+Acho que é apenas meu magnetismo animal.
+
+Ambos riem.
+
+SHREK
+Aw, vem cá, você. (dá um 
+cascudo no Burro)
+
+BURRO
+Tudo bem, tudo bem. Não fique todo 
+meloso. Ninguém gosta de puxa-saco. Tudo 
+certo, suba e segure firme. Não tive 
+a chance de instalar os cintos de segurança 
+ainda.
+
+Eles sobem a bordo do dragão e ela decola para Duloc.
+
+DULOC - IGREJA
+
+Fiona e Farquaad estão se casando. A cidade inteira está lá. 
+O cara do cartão do ponto segura um cartão que diz 'Silêncio Reverente'.
+
+PADRE
+Povo de Duloc, nos reunimos aqui hoje 
+para testemunhar a união...
 
 FIONA
-(eyeing the setting sun) Um-
+(olhando para o pôr do sol) Hum-
 
-PRIEST
-...of our new king...
+PADRE
+...do nosso novo rei...
 
 FIONA
-Excuse me. Could we just skip ahead 
-to the "I do's"?
+Com licença. Poderíamos pular direto 
+para o "eu aceito"?
 
 FARQUAAD
-(chuckles and then motions to the priest 
-to indulge Fiona) Go on.
+(ri e então faz sinal para o padre 
+fazer a vontade de Fiona) Prossiga.
 
-COURTYARD
+PÁTIO
 
-Some guards are milling around. Suddenly the dragon lands with 
-a boom. The guards all take off running.
+Alguns guardas estão perambulando. De repente, o dragão pousa com 
+um estrondo. Os guardas saem correndo.
 
-DONKEY
-(to Dragon) Go ahead, HAVE SOME FUN. 
-If we need you, I'll whistle. How about 
-that? (she nods and goes after the guards) 
-Shrek, wait, wait! Wait a minute! You 
-wanna do this right, don't you?
-
-SHREK
-(at the Church door) What are you talking 
-about?
-
-DONKEY
-There's a line you gotta wait for. The 
-preacher's gonna say, "Speak now or 
-forever hold your peace." That's when 
-you say, "I object!"
+BURRO
+(para o Dragão) Vá em frente, DIVIRTA-SE. 
+Se precisarmos de você, eu assobio. Que tal 
+isso? (ela acena e vai atrás dos guardas) 
+Shrek, espere, espere! Espere um minuto! Você 
+quer fazer isso direito, não quer?
 
 SHREK
-I don't have time for this!
+(na porta da Igreja) Do que você está falando?
 
-DONKEY
-Hey, wait. What are you doing? Listen 
-to me! Look, you love this woman, don't 
-you?
-
-SHREK
-Yes.
-
-DONKEY
-You wanna hold her?
+BURRO
+Tem uma frase que você tem que esperar. O 
+padre vai dizer: "Fale agora ou 
+cale-se para sempre." É aí que 
+você diz: "Eu objeto!"
 
 SHREK
-Yes.
+Eu não tenho tempo para isso!
 
-DONKEY
-Please her?
-
-SHREK
-Yes!
-
-DONKEY
-(singing James Brown style) Then you 
-got to, got to try a little tenderness. 
-(normal) The chicks love that romantic 
-crap!
+BURRO
+Ei, espere. O que você está fazendo? Me escute! 
+Olha, você ama essa mulher, não ama?
 
 SHREK
-All right! Cut it out. When does this 
-guy say the line?
+Sim.
 
-DONKEY
-We gotta check it out.
-
-INSIDE CHURCH
-
-As the priest talks we see Donkey's shadow through one of the 
-windows Shrek tosses him up so he can see.
-
-PRIEST
-And so, by the power vested in me...
-
-
-Outside
+BURRO
+Você quer abraçá-la?
 
 SHREK
-What do you see?
+Sim.
 
-DONKEY
-The whole town's in there.
-
-Inside
-
-PRIEST
-I now pronounce you husband and wife...
-
-
-Outside
-
-DONKEY
-They're at the altar.
-
-Inside
-
-PRIEST
-...king and queen.
-
-Outside
-
-DONKEY
-Mother Fletcher! He already said it.
-
+BURRO
+Agradá-la?
 
 SHREK
-Oh, for the love of Pete!
+Sim!
 
-He runs inside without catching Donkey, who hits the ground hard.
-
-
-INSIDE CHURCH
+BURRO
+(cantando estilo James Brown) Então você 
+tem que, tem que tentar um pouco de ternura. 
+(normal) As garotas adoram essa porcaria romântica!
 
 SHREK
-(running toward the alter) I object!
+Tudo bem! Pare com isso. Quando esse 
+cara diz a frase?
 
+BURRO
+Temos que verificar.
+
+DENTRO DA IGREJA
+
+Enquanto o padre fala, vemos a sombra do Burro através de uma das 
+janelas. Shrek o joga para cima para que ele possa ver.
+
+PADRE
+E assim, pelo poder investido em mim...
+
+Fora
+
+SHREK
+O que você vê?
+
+BURRO
+A cidade inteira está lá dentro.
+
+Dentro
+
+PADRE
+Eu agora vos declaro marido e mulher...
+
+Fora
+
+BURRO
+Eles estão no altar.
+
+Dentro
+
+PADRE
+...rei e rainha.
+
+Fora
+
+BURRO
+Mãe do céu! Ele já disse isso.
+
+SHREK
+Oh, pelo amor de Deus!
+
+Ele corre para dentro sem segurar o Burro, que bate no chão com força.
+
+DENTRO DA IGREJA
+
+SHREK
+(correndo em direção ao altar) Eu objeto!
 
 FIONA
 Shrek?
 
-The whole congregation gasps as they see Shrek.
+Toda a congregação engasga ao ver Shrek.
 
 FARQUAAD
-Oh, now what does he want?
+Oh, agora o que ele quer?
 
 SHREK
-(to congregation as he reaches the front 
-of the Church) Hi, everyone. Havin' 
-a good time, are ya? I love DuLoc, first 
-of all. Very clean.
+(para a congregação ao chegar à frente 
+da Igreja) Oi, pessoal. Estão se divertindo? 
+Eu adoro Duloc, antes de tudo. Muito limpa.
 
 FIONA
-What are you doing here?
+O que você está fazendo aqui?
 
 SHREK
-Really, it's rude enough being alive 
-when no one wants you, but showing up 
-uninvited to a wedding...
+Sério, já é rude o suficiente estar vivo 
+quando ninguém te quer, mas aparecer 
+sem ser convidado em um casamento...
 
 SHREK
-Fiona! I need to talk to you.
+Fiona! Eu preciso falar com você.
 
 FIONA
-Oh, now you wanna talk? It's a little 
-late for that, so if you'll excuse me 
+Oh, agora você quer conversar? É um pouco 
+tarde para isso, então se você me der licença 
 - -
 
 SHREK
-But you can't marry him.
+Mas você não pode se casar com ele.
 
 FIONA
-And why not?
+E por que não?
 
 SHREK
-Because- - Because he's just marring 
-you so he can be king.
+Porque- - Porque ele só está se casando 
+com você para poder ser rei.
 
 FARQUAAD
-Outrageous! Fiona, don't listen to him.
-
+Ultrajante! Fiona, não dê ouvidos a ele.
 
 SHREK
-He's not your true love.
+Ele não é seu verdadeiro amor.
 
 FIONA
-And what do you know about true love?
-
+E o que você sabe sobre amor verdadeiro?
 
 SHREK
-Well, I - - Uh - - I mean - -
+Bem, eu - - Uh - - Quero dizer - -
 
 FARQUAAD
-Oh, this is precious. The ogee has fallen 
-in love with the princess! Oh, good 
-Lord. (laughs)
+Oh, isso é precioso. O ogro se apaixonou 
+pela princesa! Oh, bom 
+Deus. (ri)
 
-The prompter card guy holds up a card that says 'Laugh'. The 
-whole congregation laughs.
+O cara do cartão do ponto segura um cartão que diz 'Riam'. A 
+congregação inteira ri.
 
 FARQUAAD
-An ogre and a princess!
+Um ogro e uma princesa!
 
 FIONA
-Shrek, is this true?
+Shrek, isso é verdade?
 
 FARQUAAD
-Who cares? It's preposterous! Fiona, 
-my love, we're but a kiss away from 
-our "happily ever after." Now kiss me! 
-(puckers his lips and leans toward her, 
-but she pulls back.)
+Quem se importa? É absurdo! Fiona, 
+meu amor, estamos a apenas um beijo do 
+nosso "felizes para sempre". Agora me beije! 
+(faz bico e se inclina em direção a ela, 
+mas ela recua.)
 
 FIONA
-(looking at the setting sun) "By night 
-one way, by day another." (to Shrek) 
-I wanted to show you before.
+(olhando para o pôr do sol) "De noite 
+de um jeito, de dia de outro." (para Shrek) 
+Eu queria te mostrar antes.
 
-She backs up and as the sun sets she changes into her ogre self. 
-She gives Shrek a sheepish smile.
+Ela recua e, enquanto o sol se põe, ela se transforma em sua versão ogra. 
+Ela dá um sorriso tímido para Shrek.
 
 SHREK
-Well, uh, that explains a lot. (Fiona 
-smiles)
+Bem, uh, isso explica muita coisa. (Fiona 
+sorri)
 
 FARQUAAD
-Ugh! It's disgusting! Guards! Guards! 
-I order you to get that out of my sight 
-now! Get them! Get them both!
+Ugh! É nojento! Guardas! Guardas! 
+Eu ordeno que tirem isso da minha vista 
+agora! Peguem-nos! Peguem os dois!
 
-The guards run in and separate Fiona and Shrek. Shrek fights 
-them.
+Os guardas entram correndo e separam Fiona e Shrek. Shrek luta 
+contra eles.
 
 SHREK
-No, no!
+Não, não!
 
 FIONA
 Shrek!
 
 FARQUAAD
-This hocus-pocus alters nothing. This 
-marriage is binding, and that makes 
-me king! See? See?
+Este hocus-pocus não altera nada. Este 
+casamento é vinculativo, e isso faz de 
+mim rei! Viu? Viu?
 
 FIONA
-No, let go of me! Shrek!
+Não, me solte! Shrek!
 
 SHREK
-No!
+Não!
 
 FARQUAAD
-Don't just stand there, you morons.
-
+Não fiquem aí parados, seus idiotas.
 
 SHREK
-Get out of my way! Fiona! Arrgh!
+Saiam do meu caminho! Fiona! Arrgh!
 
 FARQUAAD
-I'll make you regret the day we met. 
-I'll see you drawn and quartered! You'll 
-beg for death to save you!
+Farei você se arrepender do dia em que nos conhecemos. 
+Verei você esquartejado! Você vai 
+implorar pela morte para te salvar!
 
 FIONA
-No, Shrek!
+Não, Shrek!
 
 FARQUAAD
-(hold a dagger to Fiona's throat) And 
-as for you, my wife...
+(segura uma adaga no pescoço de Fiona) E 
+quanto a você, minha esposa...
 
 SHREK
 Fiona!
 
 FARQUAAD
-I'll have you locked back in that tower 
-for the rest of your days! I'm king!
+Vou te trancar de volta naquela torre 
+pelo resto dos seus dias! Eu sou rei!
 
-
-Shrek manages to get a hand free and he whistles.
+Shrek consegue liberar uma mão e assobia.
 
 FARQUAAD
-I will have order! I will have perfection! 
-I will have - - (Donkey and the dragon 
-show up and the dragon leans down and 
-eats Farquaad) Aaaah! Aah!
+Eu terei ordem! Eu terei perfeição! 
+Eu terei - - (Burro e o dragão 
+aparecem e o dragão se abaixa e 
+come Farquaad) Aaaah! Aah!
 
-DONKEY
-All right. Nobody move. I got a dragon 
-here, and I'm not afraid to use it. 
-(The dragon roars.) I'm a donkey on 
-the edge!
+BURRO
+Muito bem. Ninguém se mexe. Eu tenho um dragão 
+aqui, e não tenho medo de usá-lo. 
+(O dragão ruge.) Eu sou um burro no 
+limite!
 
-The dragon belches and Farquaad's crown flies out of her mouth 
-and falls to the ground.
+O dragão arrota e a coroa de Farquaad voa para fora de sua boca 
+e cai no chão.
 
-DONKEY
-Celebrity marriages. They never last, 
-do they?
+BURRO
+Casamentos de celebridades. Eles nunca duram, 
+não é?
 
-The congregation cheers.
+A congregação aplaude.
 
-DONKEY
-Go ahead, Shrek.
+BURRO
+Vá em frente, Shrek.
 
 SHREK
 Uh, Fiona?
 
 FIONA
-Yes, Shrek?
+Sim, Shrek?
 
 SHREK
-I - - I love you.
+Eu - - Eu te amo.
 
 FIONA
-Really?
+Sério?
 
 SHREK
-Really, really.
+Sério, sério.
 
 FIONA
-(smiles) I love you too.
+(sorri) Eu também te amo.
 
-Shrek and Fiona kiss. Thelonius takes one of the cards and writes 
-'Awwww' on the back and then shows it to the congregation.
+Shrek e Fiona se beijam. Thelonius pega um dos cartões e escreve 
+'Ownnn' nas costas e depois mostra para a congregação.
 
+CONGREGAÇÃO
+Ownnn!
 
-CONGREGATION
-Aawww!
+De repente, a magia do feitiço puxa Fiona. Ela é levantada 
+para o ar e paira lá enquanto a magia trabalha ao redor 
+dela.
 
-Suddenly the magic of the spell pulls Fiona away. She's lifted 
-up into the air and she hovers there while the magic works around 
-her.
+SUSSURROS
+"Até que encontre o primeiro beijo do amor verdadeiro 
+e então tome a verdadeira forma do amor. Tome 
+a verdadeira forma do amor. Tome a verdadeira forma do amor."
 
-WHISPERS
-"Until you find true love's first kiss 
-and then take love's true form. Take 
-love's true form. Take love's true form."
-
-
-Suddenly Fiona's eyes open wide. She's consumed by the spell 
-and then is slowly lowered to the ground.
+De repente, os olhos de Fiona se arregalam. Ela é consumida pelo feitiço 
+e então é lentamente baixada ao chão.
 
 SHREK
-(going over to her) Fiona? Fiona. Are 
-you all right?
+(indo até ela) Fiona? Fiona. Você 
+está bem?
 
 FIONA
-(standing up, she's still an ogre) Well, 
-yes. But I don't understand. I'm supposed 
-to be beautiful.
+(levantando-se, ela ainda é uma ogra) Bem, 
+sim. Mas eu não entendo. Eu deveria 
+ser bonita.
 
 SHREK
-But you ARE beautiful.
+Mas você É bonita.
 
-They smile at each other.
+Eles sorriem um para o outro.
 
-DONKEY
-(chuckles) I was hoping this would be 
-a happy ending.
+BURRO
+(ri) Eu estava esperando que isso fosse 
+um final feliz.
 
-Shrek and Fiona kiss...and the kiss fades into...
+Shrek e Fiona se beijam... e o beijo desaparece em...
 
-THE SWAMP
+O PÂNTANO
 
-...their wedding kiss. Shrek and Fiona are now married. 'I'm 
-a Believer' by Smashmouth is played in the background. Shrek 
-and Fiona break apart and run through the crowd to their awaiting 
-carriage. Which is made of a giant onion. Fiona tosses her bouquet 
-which both Cinderella and Snow White try to catch. But they end 
-up getting into a cat fight and so the dragon catches the bouquet 
-instead. The Gingerbread man has been mended somewhat and now 
-has one leg and walks with a candy cane cane. Shrek and Fiona 
-walk off as the rest of the guests party and Donkey takes over 
-singing the song.
+...o beijo de casamento deles. Shrek e Fiona agora estão casados. 'I'm 
+a Believer' do Smashmouth toca ao fundo. Shrek 
+e Fiona se separam e correm pela multidão para sua carruagem 
+que os aguarda. Que é feita de uma cebola gigante. Fiona joga seu buquê 
+que tanto Cinderela quanto Branca de Neve tentam pegar. Mas elas acabam 
+entrando numa briga de gato e então o dragão pega o buquê 
+no lugar. O Biscoito foi remendado um pouco e agora 
+tem uma perna e anda com uma bengala de doce. Shrek e Fiona 
+vão embora enquanto o resto dos convidados festejam e Burro assume 
+cantando a música.
 
-GINGERBREAD MAN
-God bless us, every one.
+BISCOITO
+Deus abençoe a todos nós.
 
-DONKEY
-(as he's done singing and we fade to 
-black) Oh, that's funny. Oh. Oh. I can't 
-breathe. I can't breathe.
+BURRO
+(quando ele termina de cantar e a tela escurece 
+para preto) Oh, isso é engraçado. Oh. Oh. Não consigo 
+respirar. Não consigo respirar.
 
-THE END
-`).then(e => console.log(`Código finalizado, ${e} mensagens enviadas`)).catch(console.error)
+FIM
+`).then(e => console.log(`Código finalizado, ${e} mensagens enviadas`)).catch(console.error);
